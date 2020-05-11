@@ -1,6 +1,14 @@
 import React from "react";
 import { CARTOON_API } from "http";
 import { List } from "antd";
+import { connect } from 'dva';
+
+@connect(state => {
+  console.log("state ----- ", state);
+  return {
+    chart: state.name
+  }
+})
 
 export default class CartoonDetail extends React.Component {
   constructor(props) {
@@ -12,6 +20,7 @@ export default class CartoonDetail extends React.Component {
 
   componentDidMount() {
     this.requestApi();
+    console.log(this.props);
   }
 
   async requestApi() {

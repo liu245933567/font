@@ -1,5 +1,5 @@
 import {post} from './axios';
 
-export async function queryCurrent(params) {
+export function cartoonDetail(params) {
   return post(`/cartoon/detail.json`, params);
 }

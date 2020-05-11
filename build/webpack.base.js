@@ -8,7 +8,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    home: pathResolve('src/app.jsx')
+    home: pathResolve('src/app.js')
   },
   output: {
     filename: '[name].js',
@@ -37,7 +37,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: pathResolve('src/public/index.html'),
+      template: pathResolve('src/index.html'),
       filename: 'index.html'
     }),
     // new webpack.DllReferencePlugin({

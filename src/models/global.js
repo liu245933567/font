@@ -1,4 +1,4 @@
-import { messageError } from '../utils/utils';
+import { messageError } from '../utils';
 
 export default {
   namespace: 'global', // model 的命名空间，同时也是他在全局 state 上的属性，只能用字符串，不支持通过 . 的方式创建多层命名空间
@@ -6,6 +6,7 @@ export default {
   state: { // 初始值，优先级低于传给 dva() 的 opts.initialState。
     collapsed: false,
     messageStatus: false,
+    name: 'aaaa'
   },
 
   /**
@@ -29,7 +30,7 @@ export default {
         type: 'changeMessageStatus',
         payload: response,
       });
-    },
+    }
   },
 
   /**
