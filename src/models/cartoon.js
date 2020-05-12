@@ -7,7 +7,7 @@ export default {
   },
 
   effects: {
-    *changeMessage({ payload }, { call, put }) {
+    *getCartoonDeatil({ payload }, { call, put }) {
       const { data } = yield call(cartoonDetail, payload);
       if (data && data.isOk) {
         yield put({
