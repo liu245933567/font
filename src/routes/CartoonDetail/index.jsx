@@ -3,7 +3,7 @@ import React from "react";
 import { List } from "antd";
 import { connect } from "dva";
 import PropTypes from "prop-types";
-import { withRouter } from 'dva/router';
+// import { withRouter } from 'dva/router';
 
 
 @connect(
@@ -19,7 +19,7 @@ import { withRouter } from 'dva/router';
         type: "cartoon/getCartoonDeatil",
         payload,
       });
-    },
+    }
   })
 )
 class CartoonDetail extends React.Component {
@@ -52,11 +52,11 @@ class CartoonDetail extends React.Component {
                 console.log("准备跳转");
                 this.props.history.push({
                   pathname: "/sectionDetail",
-                  query: { sectionId: item._id },
+                  query: { sectionId: item.sectionId },
                 });
               }}
             >
-              {item.title}
+              {item.sectionTitle}
             </List.Item>
           )}
         />
@@ -71,4 +71,5 @@ CartoonDetail.propTypes = {
   history: PropTypes.object,
 };
 
-export default withRouter(connect()(CartoonDetail));
+// export default withRouter(connect()(CartoonDetail));
+export default CartoonDetail;

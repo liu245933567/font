@@ -5,7 +5,7 @@ import 'moment/locale/zh-cn';
 // import { createLogger } from 'redux-logger';
 import { message } from 'antd';
 // import './rollbar';
-// import './index.less';
+import './style/main.less';
 import RouterConfig from './routes';
 import global from './models/global'
 

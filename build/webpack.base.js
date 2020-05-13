@@ -44,7 +44,7 @@ module.exports = {
     //   manifest: path.resolve(__dirname, 'dist', 'manifest.json')
     // }),
     new MiniCssExtractPlugin({
-      filename: 'css/mini.css',
+      filename: 'css/mian.css',
     }),
     new CleanWebpackPlugin(),
     // new Happypack({
@@ -118,7 +118,11 @@ module.exports = {
             plugins: [
               ["@babel/plugin-proposal-decorators", { "legacy": true }],
               ["@babel/plugin-proposal-class-properties", { "loose": true }],
-              "@babel/plugin-transform-runtime"
+              "@babel/plugin-transform-runtime",
+              [
+                "import",
+                {libraryName: "antd", style: 'css'} // 移动端添加 "libraryName": "antd-mobile"
+              ]
             ]
           }
         }
@@ -126,7 +130,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
           'postcss-loader'
         ]
@@ -134,7 +139,8 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
           'postcss-loader',
           'less-loader'
