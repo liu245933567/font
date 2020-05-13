@@ -27,8 +27,13 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const CartoonItem = ({ coverImage, cartoonName, updataTime }) => (
-      <div className="cartoon-item">
+    const CartoonItem = ({
+      coverImage,
+      cartoonName,
+      updataTime,
+      toCheckDetail,
+    }) => (
+      <div className="cartoon-item" onClick={toCheckDetail}>
         <img src={coverImage} />
         <div className="cartoon-info-item">{cartoonName}</div>
         <div className="cartoon-info-item">{updataTime}</div>
@@ -36,9 +41,25 @@ export default class Home extends React.Component {
     );
     return (
       <div className="Home-wrapper">
-        {this.props.cartoonList.map((item) => (
-          <CartoonItem key={item._id} {...item}/>
-        ))}
+        <div className="list-wrapper">
+          {this.props.cartoonList.map((item) => (
+            <CartoonItem
+              key={item._id}
+              {...item}
+              toCheckDetail={() => {
+                console.log("点击跳转");
+                // this.props.history.push({
+                //   pathname: "/cartoonDetail",
+                //   state: {
+                //     collectionTag: item.collectionTag,
+                //   },
+                //   query: { collectionTag: item.collectionTag },
+                // });
+                this.props.history.push(`/cartoonDetail?collectionTag=${item.collectionTag}`)
+              }}
+            />
+          ))}
+        </div>
       </div>
     );
   }

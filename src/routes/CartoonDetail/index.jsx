@@ -5,7 +5,6 @@ import { connect } from "dva";
 import PropTypes from "prop-types";
 // import { withRouter } from 'dva/router';
 
-
 @connect(
   (state) => {
     console.log("state ----- ", state);
@@ -19,7 +18,7 @@ import PropTypes from "prop-types";
         type: "cartoon/getCartoonDeatil",
         payload,
       });
-    }
+    },
   })
 )
 class CartoonDetail extends React.Component {
@@ -31,8 +30,10 @@ class CartoonDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchGetSectionList({ id: "我是大神仙" });
-    console.log(this.props);
+    console.log('this.props ------ ', this.props);
+    this.props.dispatchGetSectionList({
+      // collectionTag: this.props.history.location.query.collectionTag || "",
+    });
   }
 
   render() {

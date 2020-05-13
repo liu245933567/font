@@ -95,15 +95,15 @@ module.exports = {
         test: /\.html$/,
         use: 'html-withimg-loader'
       },
-      {
-        test: /\.js$/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            enforce: 'pre' //强制之前执行
-          }
-        }
-      },
+      // {
+      //   test: /\.js$/,
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       enforce: 'pre' //强制之前执行
+      //     }
+      //   }
+      // },
       {
         test: /\.(js|jsx)$/,
         include: pathResolve('src'),

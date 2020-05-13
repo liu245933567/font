@@ -19,6 +19,20 @@ axios.interceptors.request.use(
  * response之后的处理
  */
 axios.interceptors.response.use(
+  // response => {
+  //   const {
+  //     isOk,
+  //     code,
+  //     data,
+  //     message
+  //   } = response;
+  //   return {
+  //     isOk,
+  //     code,
+  //     message,
+  //     ...data
+  //   }
+  // },
   response => response,
   err => Promise.resolve({
     data: {

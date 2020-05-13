@@ -11,6 +11,7 @@ export default {
     // 获取动漫列表
     *getCartoonList({ payload }, { call, put }) {
       const { data } = yield call(cartoonList, payload);
+      console.log(data);
       if (data && data.isOk) {
         yield put({
           type: 'changeCartoonList',
