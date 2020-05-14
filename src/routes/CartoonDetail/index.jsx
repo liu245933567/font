@@ -1,6 +1,6 @@
 import React from "react";
 // import { CARTOON_API } from "http";
-import { List } from "antd";
+// import { List } from "antd";
 import { connect } from "dva";
 import PropTypes from "prop-types";
 // import { withRouter } from 'dva/router';
@@ -30,9 +30,12 @@ class CartoonDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this.props ------ ', this.props);
+    console.log("this.props ------ ", this.props);
     this.props.dispatchGetSectionList({
-      // collectionTag: this.props.history.location.query.collectionTag || "",
+      collectionTag: 'woshidashenxian',
+      sortType: 1,
+      pageIndex: 1,
+      pageSize: 40
     });
   }
 
@@ -41,26 +44,13 @@ class CartoonDetail extends React.Component {
 
     return (
       <div>
-        <List
-          size="large"
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          dataSource={sectionList}
-          renderItem={(item) => (
-            <List.Item
-              onClick={() => {
-                console.log("准备跳转");
-                this.props.history.push({
-                  pathname: "/sectionDetail",
-                  query: { sectionId: item.sectionId },
-                });
-              }}
-            >
-              {item.sectionTitle}
-            </List.Item>
-          )}
-        />
+        <ul className="section-list-wrapper">
+          {sectionList.map((item) => (
+            <li key={item.sectionId} className="section-item">
+              <div>{item.sectionTitle}</div>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
