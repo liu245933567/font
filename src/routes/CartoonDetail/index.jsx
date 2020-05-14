@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 @connect(
   (state) => {
-    console.log("state ----- ", state);
     return {
       sectionList: state.cartoon.sectionList,
     };
@@ -31,8 +30,9 @@ class CartoonDetail extends React.Component {
 
   componentDidMount() {
     console.log("this.props ------ ", this.props);
+    const {collectionTag} = this.props.history.location.query;
     this.props.dispatchGetSectionList({
-      collectionTag: 'woshidashenxian',
+      collectionTag,
       sortType: 1,
       pageIndex: 1,
       pageSize: 40
@@ -41,12 +41,17 @@ class CartoonDetail extends React.Component {
 
   render() {
     const { sectionList } = this.props;
-
+    const {collectionTag} = this.props.history.location.query;
     return (
       <div>
         <ul className="section-list-wrapper">
           {sectionList.map((item) => (
-            <li key={item.sectionId} className="section-item">
+            <li key={item.sectionId} className="section-item" onClick={() => {
+              this.props.history.push({
+                pathname: "/sectionDetail",
+                  query: { sectionId: item.sectionId, collectionTag },
+              })
+            }}>
               <div>{item.sectionTitle}</div>
             </li>
           ))}

@@ -1,10 +1,11 @@
-import { cartoonDetail, cartoonList } from '../services/cartoon';
+import { cartoonDetail, cartoonList, sectionDetail } from '../services/cartoon';
 
 export default {
   namespace: 'cartoon',
   state: {
     cartoonList: [],
-    sectionList: []
+    sectionList: [],
+    sectionInfo: null
   },
 
   effects: {
@@ -29,6 +30,17 @@ export default {
           payload: data.sectioList,
         });
       }
+    },
+
+    // 获取动漫详情
+    *getSectionDeatil({ payload }, { call, put }) {
+      const { data } = yield call(sectionDetail, payload);
+      if (data && data.isOk) {
+        yield put({
+          type: 'changeSectionDeatil',
+          payload: data.sectionInfo
+        });
+      }
     }
   },
 
@@ -44,6 +56,13 @@ export default {
       return {
         ...state,
         sectionList: payload,
+      };
+    },
+
+    changeSectionDeatil(state, { payload }) {
+      return {
+        ...state,
+        sectionInfo: payload
       };
     }
   }

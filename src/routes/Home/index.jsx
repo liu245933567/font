@@ -48,14 +48,11 @@ export default class Home extends React.Component {
               {...item}
               toCheckDetail={() => {
                 console.log("点击跳转");
-                // this.props.history.push({
-                //   pathname: "/cartoonDetail",
-                //   state: {
-                //     collectionTag: item.collectionTag,
-                //   },
-                //   query: { collectionTag: item.collectionTag },
-                // });
-                this.props.history.push(`/cartoonDetail?collectionTag=${item.collectionTag}`)
+                this.props.history.push({
+                  pathname: "/cartoonDetail",
+                  query: { collectionTag: item.collectionTag },
+                });
+                // this.props.history.push(`/cartoonDetail?collectionTag=${item.collectionTag}`)
               }}
             />
           ))}
