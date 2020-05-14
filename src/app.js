@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import dva from 'dva';
 import 'moment/locale/zh-cn';
-// const browserHistory = require("history").createBrowserHistory;
+const browserHistory = require("history").createBrowserHistory;
 // import { createLogger } from 'redux-logger';
 import { message } from 'antd';
 // import './rollbar';
@@ -11,7 +11,7 @@ import global from './models/global'
 
 // 1. 创建应用，返回 dva 实例
 const app = dva({
-  // history: browserHistory(),
+  history: browserHistory(),
   onError(e) {
     message.error(e.message, /* duration */3);
   },
