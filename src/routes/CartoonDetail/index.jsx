@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
   (state) => {
     return {
       sectionList: state.cartoon.sectionList,
+      queryCartoonDetailParams: state.cartoon.queryCartoonDetailParams
     };
   },
   (dispatch) => ({
@@ -23,33 +24,21 @@ import PropTypes from "prop-types";
 class CartoonDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sectionList: [],
-    };
   }
 
   componentDidMount() {
-    console.log("this.props ------ ", this.props);
-    const {collectionTag} = this.props.history.location.query;
-    this.props.dispatchGetSectionList({
-      collectionTag,
-      sortType: 1,
-      pageIndex: 1,
-      pageSize: 40
-    });
+    this.props.dispatchGetSectionList();
   }
 
   render() {
     const { sectionList } = this.props;
-    const {collectionTag} = this.props.history.location.query;
     return (
       <div>
         <ul className="section-list-wrapper">
           {sectionList.map((item) => (
             <li key={item.sectionId} className="section-item" onClick={() => {
               this.props.history.push({
-                pathname: "/sectionDetail",
-                  query: { sectionId: item.sectionId, collectionTag },
+                pathname: "/sectionDetail"
               })
             }}>
               <div>{item.sectionTitle}</div>
@@ -65,7 +54,7 @@ CartoonDetail.propTypes = {
   sectionList: PropTypes.array,
   dispatchGetSectionList: PropTypes.func,
   history: PropTypes.object,
+  queryCartoonDetailParams: PropTypes.object
 };
 
-// export default withRouter(connect()(CartoonDetail));
 export default CartoonDetail;

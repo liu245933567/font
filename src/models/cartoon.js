@@ -5,6 +5,13 @@ export default {
   state: {
     cartoonList: [],
     sectionList: [],
+    // 查询动漫详情的参数
+    queryCartoonDetailParams: {
+      collectionTag: '',
+      sortType: -1,
+      pageIndex: 1,
+      pageSize: 2000
+    },
     sectionInfo: null
   },
 
@@ -22,8 +29,9 @@ export default {
     },
 
     // 获取动漫详情
-    *getCartoonDeatil({ payload }, { call, put }) {
-      const { data } = yield call(cartoonDetail, payload);
+    *getCartoonDeatil({ payload }, { call, put, select }) {
+      const { queryCartoonDetailParams } = yield select((state) => state.cartoon);
+      const { data } = yield call(cartoonDetail, queryCartoonDetailParams);
       if (data && data.isOk) {
         yield put({
           type: 'changeSectionList',
@@ -45,25 +53,36 @@ export default {
   },
 
   reducers: {
+    // 保存动漫列表
     changeCartoonList(state, { payload }) {
       return {
         ...state,
         cartoonList: payload,
       };
     },
-
+    // 保存章节列表
     changeSectionList(state, { payload }) {
       return {
         ...state,
         sectionList: payload,
       };
     },
-
+    // 保存章节详情
     changeSectionDeatil(state, { payload }) {
       return {
         ...state,
         sectionInfo: payload
       };
+    },
+    // 更改查询动漫详情的参数
+    changeQueryCartoonDetailParams(state, { payload }) {
+      return {
+        ...state,
+        queryCartoonDetailParams: {
+          ...state.queryCartoonDetailParams,
+          ...payload
+        }
+      }
     }
   }
 }

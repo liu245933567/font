@@ -1,7 +1,6 @@
 import React from "react";
 import {
   routerRedux,
-  // Router,
   Switch,
   Route,
 } from "dva/router";
@@ -9,27 +8,16 @@ import { Spin } from "antd";
 import PropTypes from "prop-types";
 import dynamic from "dva/dynamic";
 
+import Home from './Home';
+import CartoonDetail from './CartoonDetail';
+import SectionDetail from './SectionDetail';
+
 dynamic.setDefaultLoadingComponent(() => {
   return <Spin size="large" className="loading" />;
 });
 const { ConnectedRouter } = routerRedux;
 
-function RouterConfig({ history, app }) {
-  const Home = dynamic({
-    app,
-    models: () => [import("../models/cartoon")],
-    component: () => import("./Home"),
-  });
-  const CartoonDetail = dynamic({
-    app,
-    models: () => [import("../models/cartoon")],
-    component: () => import("./CartoonDetail/index"),
-  });
-  const SectionDetail = dynamic({
-    app,
-    models: () => [import("../models/cartoon")],
-    component: () => import("./SectionDetail/index"),
-  });
+function RouterConfig({ history }) {
   history.listen(({ pathname, search }) => {
     console.log(`pathname...: ${pathname}`);
     console.log(search);

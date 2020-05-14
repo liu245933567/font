@@ -15,6 +15,12 @@ import PropTypes from "prop-types";
         payload,
       });
     },
+    dispatchChangeQueryCartoonDetailParams(payload){
+      dispatch({
+        type: "cartoon/changeQueryCartoonDetailParams",
+        payload,
+      });
+    }
   })
 )
 export default class Home extends React.Component {
@@ -48,9 +54,9 @@ export default class Home extends React.Component {
               {...item}
               toCheckDetail={() => {
                 console.log("点击跳转");
+                this.props.dispatchChangeQueryCartoonDetailParams({collectionTag: item.collectionTag})
                 this.props.history.push({
-                  pathname: "/cartoonDetail",
-                  query: { collectionTag: item.collectionTag },
+                  pathname: "/cartoonDetail"
                 });
                 // this.props.history.push(`/cartoonDetail?collectionTag=${item.collectionTag}`)
               }}
@@ -65,5 +71,6 @@ export default class Home extends React.Component {
 Home.propTypes = {
   cartoonList: PropTypes.array,
   dispatchGetCartoonList: PropTypes.func,
+  dispatchChangeQueryCartoonDetailParams: PropTypes.func,
   history: PropTypes.object,
 };
