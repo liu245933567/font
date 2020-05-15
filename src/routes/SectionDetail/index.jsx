@@ -23,33 +23,59 @@ export default class SectionDetail extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.dispatchGetSectionDeatil({
-      collectionTag: "jiemoren",
-      sectionId: 11037,
-    });
-  }
-
   render() {
-    const { imagesList, sectionTitle } = this.props.sectionInfo || {
-      imagesList: [],
-      sectionTitle: "没有",
-    };
+    const { sectionInfo, dispatchGetSectionDeatil } = this.props;
+    const { imagesList, sectionTitle, sectionId } = sectionInfo;
+    console.log(this.props.sectionInfo);
     return (
       <div className="SectionDetail-detail-wrapper">
-        <div className="section-title">{sectionTitle}</div>
+        <div className="section-title">{sectionTitle || "--"}</div>
+
+        <div className="float-btn-wrapper">
+          <div
+            className="con-btn"
+            onClick={() => {
+              dispatchGetSectionDeatil({ queryType: "prev", sectionId });
+            }}
+          >
+            上一章
+          </div>
+          <div
+            className="con-btn"
+            onClick={() => {
+              dispatchGetSectionDeatil({ queryType: "next", sectionId });
+            }}
+          >
+            下一章
+          </div>
+        </div>
 
         <ul className="images-wrapper">
-          {imagesList.map((url) => (
-            <li className="image-item-wrapper" key={url}>
-              <img src={url} />
-            </li>
-          ))}
+          {imagesList &&
+            imagesList.map((url) => (
+              <li className="image-item-wrapper" key={url}>
+                <img src={url} />
+              </li>
+            ))}
         </ul>
 
         <div className="float-btn-wrapper">
-          <div className="con-btn">上一章</div>
-          <div className="con-btn">下一章</div>
+          <div
+            className="con-btn"
+            onClick={() => {
+              dispatchGetSectionDeatil({ queryType: "prev", sectionId });
+            }}
+          >
+            上一章
+          </div>
+          <div
+            className="con-btn"
+            onClick={() => {
+              dispatchGetSectionDeatil({ queryType: "next", sectionId });
+            }}
+          >
+            下一章
+          </div>
         </div>
       </div>
     );

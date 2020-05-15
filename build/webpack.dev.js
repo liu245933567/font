@@ -1,11 +1,12 @@
 const { smart } = require('webpack-merge');
 const base = require('./webpack.base');
 const webpack = require('webpack');
-const {pathResolve} = require('./utils');
+const {pathResolve, getIP} = require('./utils');
 
 module.exports = smart(base, {
   mode: 'development',
   devServer: {
+    host: getIP(),
     hot: true,
     port: 8200,
     // progress: true,

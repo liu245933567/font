@@ -16,9 +16,15 @@ import PropTypes from "prop-types";
     dispatchGetSectionList(payload) {
       dispatch({
         type: "cartoon/getCartoonDeatil",
-        payload,
+        payload
       });
     },
+    dispatchGetSectionDeatil(payload){
+      dispatch({
+        type: 'cartoon/getSectionDeatil',
+        payload
+      })
+    }
   })
 )
 class CartoonDetail extends React.Component {
@@ -37,6 +43,9 @@ class CartoonDetail extends React.Component {
         <ul className="section-list-wrapper">
           {sectionList.map((item) => (
             <li key={item.sectionId} className="section-item" onClick={() => {
+              this.props.dispatchGetSectionDeatil({
+                sectionId: item.sectionId
+              })
               this.props.history.push({
                 pathname: "/sectionDetail"
               })
@@ -53,6 +62,7 @@ class CartoonDetail extends React.Component {
 CartoonDetail.propTypes = {
   sectionList: PropTypes.array,
   dispatchGetSectionList: PropTypes.func,
+  dispatchGetSectionDeatil: PropTypes.func,
   history: PropTypes.object,
   queryCartoonDetailParams: PropTypes.object
 };

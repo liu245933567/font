@@ -12,7 +12,9 @@ export default {
       pageIndex: 1,
       pageSize: 2000
     },
-    sectionInfo: null
+    sectionInfo: {},
+    hasPrev: true,
+    hasNext: true
   },
 
   effects: {
@@ -41,12 +43,30 @@ export default {
     },
 
     // 获取动漫详情
-    *getSectionDeatil({ payload }, { call, put }) {
-      const { data } = yield call(sectionDetail, payload);
+    *getSectionDeatil({ payload }, { call, put, select }) {
+      let { sectionId, queryType } = payload;
+      const { queryCartoonDetailParams, sectionList } = yield select((state) => state.cartoon);
+      const { collectionTag, sortType } = queryCartoonDetailParams;
+
+      const sectionIndex = sectionList.findIndex(item => item.sectionId === sectionId);
+      const
+        max = sectionList.length - 1,
+        min = 0,
+        prevIndex = sectionIndex - sortType,
+        nextIndex = sectionIndex + sortType;
+      const hasPrev = prevIndex >= min && prevIndex <= max;
+      const hasNext = nextIndex >= min && nextIndex <= max;
+      if (queryType === 'prev' && hasPrev) {
+        sectionId = sectionList[prevIndex].sectionId;
+      } else if (queryType === 'next' && hasNext) {
+        sectionId = sectionList[nextIndex].sectionId;
+      }
+      
+      const { data } = yield call(sectionDetail, { sectionId, collectionTag });
       if (data && data.isOk) {
         yield put({
           type: 'changeSectionDeatil',
-          payload: data.sectionInfo
+          payload: { sectionInfo: data.sectionInfo, hasPrev, hasNext }
         });
       }
     }
@@ -71,7 +91,7 @@ export default {
     changeSectionDeatil(state, { payload }) {
       return {
         ...state,
-        sectionInfo: payload
+        ...payload
       };
     },
     // 更改查询动漫详情的参数
