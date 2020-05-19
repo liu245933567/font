@@ -3,7 +3,7 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const base = require('./webpack.base');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+// const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = smart(base, {
   mode: 'production',
@@ -22,11 +22,11 @@ module.exports = smart(base, {
       ENV: JSON.stringify('production')
     }),
     new webpack.BannerPlugin('当年明月在，曾照彩云归'),
-    new CopyWebpackPlugin([
-      {
-        from: '../doc',
-        to: '../dist'
-      }
-    ])
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: '../doc',
+    //     to: '../dist'
+    //   }
+    // ])
   ]
 })

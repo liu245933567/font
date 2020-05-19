@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { HOST, WITHCREDENTIALS } from 'config';
 
+
 axios.defaults.baseURL = HOST;
 axios.defaults.withCredentials = WITHCREDENTIALS;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';

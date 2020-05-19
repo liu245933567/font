@@ -9,6 +9,8 @@ module.exports = smart(base, {
     host: getIP(),
     hot: true,
     port: 8200,
+    disableHostCheck: true,
+    overlay: true,
     // progress: true,
     contentBase: pathResolve('dist'),
     // before(app) {

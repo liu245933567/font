@@ -1,6 +1,6 @@
-// console.log(process.env);
+import {getRootHost} from '../utils';
 
-let HOST = 'http://192.168.137.1:3000';
+let HOST = getRootHost();
 let WITHCREDENTIALS = true;
 
 export {
