@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "dva";
 import PropTypes from "prop-types";
-import Login from "../../components/Login";
+// import LoginForm from "../../components/LoginForm";
+import RegisterForm from "../../components/RegisterForm";
 
 @connect(
   (state) => {
@@ -38,7 +39,8 @@ class Account extends React.Component {
     // const { sectionList } = this.props;
     return (
       <div className="Account-page-wrapper">
-        <Login />
+        {/* <LoginForm /> */}
+        <RegisterForm/>
       </div>
     );
   }
