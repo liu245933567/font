@@ -3,6 +3,7 @@ import { routerRedux, Switch, Route } from "dva/router";
 import { Spin } from "antd";
 import PropTypes from "prop-types";
 import dynamic from "dva/dynamic";
+import Nav from "../components/Nav";
 
 // import Home from './Home';
 // import CartoonDetail from './CartoonDetail';
@@ -40,12 +41,15 @@ function RouterConfig({ history, app }) {
   });
   return (
     <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/cartoonDetail" component={CartoonDetail} />
-        <Route exact path="/sectionDetail" component={SectionDetail} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+      <div className="wrapper">
+        <Nav/>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/cartoonDetail" component={CartoonDetail} />
+          <Route exact path="/sectionDetail" component={SectionDetail} />
+          <Route exact path="/login" component={Login} />
+        </Switch>
+      </div>
     </ConnectedRouter>
   );
 }
