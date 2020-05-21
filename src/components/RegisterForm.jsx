@@ -1,54 +1,9 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete,
-} from "antd";
+import { Form, Input, Tooltip, Select, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
-// const AutoCompleteOption = AutoComplete.Option;
-const residences = [
-  {
-    value: "zhejiang",
-    label: "Zhejiang",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "jiangsu",
-    label: "Jiangsu",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men",
-          },
-        ],
-      },
-    ],
-  },
-];
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -99,37 +54,22 @@ const RegisterForm = () => {
       </Select>
     </Form.Item>
   );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
-
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
+      className="register-wrapper"
       onFinish={onFinish}
       initialValues={{
-        residence: ["zhejiang", "hangzhou", "xihu"],
         prefix: "86",
+        sex: "1",
       }}
       scrollToFirstError
     >
       <Form.Item
         name="email"
-        label="E-mail"
+        label="邮箱"
         rules={[
           {
             type: "email",
@@ -146,11 +86,11 @@ const RegisterForm = () => {
 
       <Form.Item
         name="password"
-        label="Password"
+        label="密码"
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "请输入您的密码!",
           },
         ]}
         hasFeedback
@@ -160,13 +100,13 @@ const RegisterForm = () => {
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="确认密码"
         dependencies={["password"]}
         hasFeedback
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: "请确认您的密码!",
           },
           ({ getFieldValue }) => ({
             validator(rule, value) {
@@ -174,9 +114,7 @@ const RegisterForm = () => {
                 return Promise.resolve();
               }
 
-              return Promise.reject(
-                "The two passwords that you entered do not match!"
-              );
+              return Promise.reject("两次输入的密码不匹配!");
             },
           }),
         ]}
@@ -188,8 +126,8 @@ const RegisterForm = () => {
         name="nickname"
         label={
           <span>
-            Nickname&nbsp;
-            <Tooltip title="What do you want others to call you?">
+            昵称&nbsp;
+            <Tooltip title="你想起一个怎样牛逼的名字呢?">
               <QuestionCircleOutlined />
             </Tooltip>
           </span>
@@ -197,7 +135,7 @@ const RegisterForm = () => {
         rules={[
           {
             required: true,
-            message: "Please input your nickname!",
+            message: "请输入您的昵称!",
             whitespace: true,
           },
         ]}
@@ -206,26 +144,12 @@ const RegisterForm = () => {
       </Form.Item>
 
       <Form.Item
-        name="residence"
-        label="Habitual Residence"
-        rules={[
-          {
-            type: "array",
-            required: true,
-            message: "Please select your habitual residence!",
-          },
-        ]}
-      >
-        <Cascader options={residences} />
-      </Form.Item>
-
-      <Form.Item
         name="phone"
-        label="Phone Number"
+        label="手机号"
         rules={[
           {
             required: true,
-            message: "Please input your phone number!",
+            message: "请输入您的手机号!",
           },
         ]}
       >
@@ -238,69 +162,31 @@ const RegisterForm = () => {
       </Form.Item>
 
       <Form.Item
-        name="website"
-        label="Website"
-        rules={[
-          {
-            required: true,
-            message: "Please input website!",
-          },
-        ]}
+        name="sex"
+        label="性别"
+        // noStyle
+        rules={[{ required: true, message: "Province is required" }]}
       >
-        <AutoComplete
-          options={websiteOptions}
-          onChange={onWebsiteChange}
-          placeholder="website"
+        <Select
+          style={{
+            width: "60px",
+          }}
+          placeholder="Select province"
         >
-          <Input />
-        </AutoComplete>
+          <Option selected value="1">
+            男
+          </Option>
+          <Option value="0">女</Option>
+        </Select>
       </Form.Item>
 
-      <Form.Item
-        label="Captcha"
-        extra="We must make sure that your are a human."
-      >
-        <Row gutter={8}>
-          <Col span={12}>
-            <Form.Item
-              name="captcha"
-              noStyle
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the captcha you got!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Button>Get captcha</Button>
-          </Col>
-        </Row>
-      </Form.Item>
-
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value
-                ? Promise.resolve()
-                : Promise.reject("Should accept agreement"),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
-      </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
+        <Button
+          className="register-form-button"
+          type="primary"
+          htmlType="submit"
+        >
+          注册
         </Button>
       </Form.Item>
     </Form>
