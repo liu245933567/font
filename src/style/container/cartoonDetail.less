@@ -1,24 +1,61 @@
-.section-list-wrapper {
-  width: 640px;
-  padding-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  .section-item {
-    width: 120px;
-    height: 40px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    text-align: justify;
-    background-color: #ece6e666;
+.Cartoon-Detail-page {
+  .page-header {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    line-height: 15px;
-    padding: 0 10px;
-    &:nth-child(5n) {
-      margin-right: 0;
+    width: 640px;
+    margin: auto;
+    padding-top: 20px;
+    .header-image-wrapper {
+      width: 120px;
+      height: 160px;
+      img {
+        width: 120px;
+        height: 160px;
+      }
+    }
+    .header-content {
+      flex: 1;
+      padding: 10px;
+      .cartoon-name {
+        line-height: 44px;
+        font-size: 27px;
+        font-family: sans-serif;
+      }
+      .cartoon-update{
+        font-size: 18px;
+        line-height: 34px;
+      }
+      .cartoon-description{
+        line-height: 21px;
+        color: #888;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+    }
+  }
+  .section-list-wrapper {
+    width: 640px;
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    .section-item {
+      width: 120px;
+      height: 40px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      text-align: justify;
+      background-color: #ece6e666;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      line-height: 15px;
+      padding: 0 10px;
+      &:nth-child(5n) {
+        margin-right: 0;
+      }
     }
   }
 }
