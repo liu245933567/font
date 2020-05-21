@@ -5,6 +5,7 @@ export default {
   state: {
     cartoonList: [],
     sectionList: [],
+    selectedCartoon: {},
     // 查询动漫详情的参数
     queryCartoonDetailParams: {
       collectionTag: '',
@@ -78,6 +79,13 @@ export default {
       return {
         ...state,
         cartoonList: payload,
+      };
+    },
+    // 选中动漫
+    saveCartoonDetail(state, { payload }) {
+      return {
+        ...state,
+        selectedCartoon: payload,
       };
     },
     // 保存章节列表

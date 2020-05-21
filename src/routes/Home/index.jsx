@@ -12,13 +12,19 @@ import PropTypes from "prop-types";
     dispatchGetCartoonList(payload) {
       dispatch({
         type: "cartoon/getCartoonList",
-        payload,
+        payload
+      });
+    },
+    dispatchSaveCartoonDetail(payload) {
+      dispatch({
+        type: "cartoon/saveCartoonDetail",
+        payload
       });
     },
     dispatchChangeQueryCartoonDetailParams(payload){
       dispatch({
         type: "cartoon/changeQueryCartoonDetailParams",
-        payload,
+        payload
       });
     }
   })
@@ -53,7 +59,8 @@ export default class Home extends React.Component {
               key={item._id}
               {...item}
               toCheckDetail={() => {
-                this.props.dispatchChangeQueryCartoonDetailParams({collectionTag: item.collectionTag})
+                this.props.dispatchSaveCartoonDetail(item);
+                this.props.dispatchChangeQueryCartoonDetailParams({collectionTag: item.collectionTag});
                 this.props.history.push({
                   pathname: "/cartoonDetail"
                 });
@@ -70,5 +77,6 @@ Home.propTypes = {
   cartoonList: PropTypes.array,
   dispatchGetCartoonList: PropTypes.func,
   dispatchChangeQueryCartoonDetailParams: PropTypes.func,
+  dispatchSaveCartoonDetail: PropTypes.func,
   history: PropTypes.object,
 };
