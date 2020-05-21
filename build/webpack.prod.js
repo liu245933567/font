@@ -3,6 +3,7 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const base = require('./webpack.base');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = smart(base, {
@@ -17,9 +18,34 @@ module.exports = smart(base, {
       new OptimizeCssAssetsWebpackPlugin()
     ]
   },
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
+        ]
+      },
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify('production')
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/mian.[hash:8].css',
     }),
     new webpack.BannerPlugin('当年明月在，曾照彩云归'),
     // new CopyWebpackPlugin([
