@@ -31,7 +31,7 @@ class CartoonDetail extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      pageSize: 40
+      pageSize: 40,
     };
   }
 
@@ -42,7 +42,7 @@ class CartoonDetail extends React.Component {
   render() {
     const { sectionList, selectedCartoon } = this.props;
     const { currentPage, pageSize } = this.state;
-    const  pageStart = (currentPage -1) * pageSize;
+    const pageStart = (currentPage - 1) * pageSize;
     const pageEnd = currentPage * pageSize;
     return (
       <div className="Cartoon-Detail-page">
@@ -72,7 +72,16 @@ class CartoonDetail extends React.Component {
           }}
           dataSource={sectionList.slice(pageStart, pageEnd)}
           renderItem={(item) => (
-            <List.Item>
+            <List.Item
+              onClick={() => {
+                this.props.dispatchGetSectionDeatil({
+                  sectionId: item.sectionId,
+                });
+                this.props.history.push({
+                  pathname: "/sectionDetail",
+                });
+              }}
+            >
               <Button className="section-item-btn">{item.sectionTitle}</Button>
             </List.Item>
           )}
@@ -89,7 +98,7 @@ class CartoonDetail extends React.Component {
           onChange={(currentPage, pageSize) => {
             this.setState({
               currentPage,
-              pageSize
+              pageSize,
             });
           }}
         />
