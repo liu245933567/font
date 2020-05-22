@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "dva";
+import { List, Button } from "antd";
 import PropTypes from "prop-types";
 
 @connect(
@@ -45,31 +46,28 @@ class CartoonDetail extends React.Component {
             </div>
             <div className="header-content">
               <div className="cartoon-name">{selectedCartoon.cartoonName}</div>
-              <div className="cartoon-update">上次更新：{selectedCartoon.updataTime}</div>
+              <div className="cartoon-update">
+                上次更新：{selectedCartoon.updataTime}
+              </div>
               <div className="cartoon-description">
                 简介：{selectedCartoon.description}
               </div>
             </div>
           </div>
         )}
-        <ul className="section-list-wrapper">
-          {sectionList.map((item) => (
-            <li
-              key={item.sectionId}
-              className="section-item"
-              onClick={() => {
-                this.props.dispatchGetSectionDeatil({
-                  sectionId: item.sectionId,
-                });
-                this.props.history.push({
-                  pathname: "/sectionDetail",
-                });
-              }}
-            >
-              <div>{item.sectionTitle}</div>
-            </li>
-          ))}
-        </ul>
+        <List
+          className="section-list-wrapper"
+          grid={{
+            gutter: 16,
+            column: 4,
+          }}
+          dataSource={sectionList}
+          renderItem={(item) => (
+            <List.Item>
+              <Button className="section-item-btn">{item.sectionTitle}</Button>
+            </List.Item>
+          )}
+        />
       </div>
     );
   }
