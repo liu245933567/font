@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "dva";
+import { List, Button, Pagination } from "antd";
 import PropTypes from "prop-types";
 
 @connect(
@@ -28,6 +29,10 @@ import PropTypes from "prop-types";
 class CartoonDetail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentPage: 1,
+      pageSize: 40,
+    };
   }
 
   componentDidMount() {
@@ -36,8 +41,12 @@ class CartoonDetail extends React.Component {
 
   render() {
     const { sectionList, selectedCartoon } = this.props;
+    const { currentPage, pageSize } = this.state;
+    const pageStart = (currentPage - 1) * pageSize;
+    const pageEnd = currentPage * pageSize;
     return (
       <div className="Cartoon-Detail-page">
+        {/* 页头 */}
         {selectedCartoon.cartoonName && (
           <div className="page-header">
             <div className="header-image-wrapper">
@@ -45,18 +54,25 @@ class CartoonDetail extends React.Component {
             </div>
             <div className="header-content">
               <div className="cartoon-name">{selectedCartoon.cartoonName}</div>
-              <div className="cartoon-update">上次更新：{selectedCartoon.updataTime}</div>
+              <div className="cartoon-update">
+                上次更新：{selectedCartoon.updataTime}
+              </div>
               <div className="cartoon-description">
                 简介：{selectedCartoon.description}
               </div>
             </div>
           </div>
         )}
-        <ul className="section-list-wrapper">
-          {sectionList.map((item) => (
-            <li
-              key={item.sectionId}
-              className="section-item"
+        {/* 章节列表 */}
+        <List
+          className="section-list-wrapper"
+          grid={{
+            gutter: 16,
+            column: 4,
+          }}
+          dataSource={sectionList.slice(pageStart, pageEnd)}
+          renderItem={(item) => (
+            <List.Item
               onClick={() => {
                 this.props.dispatchGetSectionDeatil({
                   sectionId: item.sectionId,
@@ -66,10 +82,26 @@ class CartoonDetail extends React.Component {
                 });
               }}
             >
-              <div>{item.sectionTitle}</div>
-            </li>
-          ))}
-        </ul>
+              <Button className="section-item-btn">{item.sectionTitle}</Button>
+            </List.Item>
+          )}
+        />
+        {/* 分页 */}
+        <Pagination
+          className="Cartoon-Detail-Pagination"
+          total={sectionList.length}
+          pageSize={pageSize}
+          showTotal={(total) => `共${total}章`}
+          defaultCurrent={currentPage}
+          showSizeChanger={false}
+          showQuickJumper
+          onChange={(currentPage, pageSize) => {
+            this.setState({
+              currentPage,
+              pageSize,
+            });
+          }}
+        />
       </div>
     );
   }

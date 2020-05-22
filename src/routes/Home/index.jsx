@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "dva";
+import { List, Card } from "antd";
 import PropTypes from "prop-types";
 
 @connect(
@@ -12,21 +13,21 @@ import PropTypes from "prop-types";
     dispatchGetCartoonList(payload) {
       dispatch({
         type: "cartoon/getCartoonList",
-        payload
+        payload,
       });
     },
     dispatchSaveCartoonDetail(payload) {
       dispatch({
         type: "cartoon/saveCartoonDetail",
-        payload
+        payload,
       });
     },
-    dispatchChangeQueryCartoonDetailParams(payload){
+    dispatchChangeQueryCartoonDetailParams(payload) {
       dispatch({
         type: "cartoon/changeQueryCartoonDetailParams",
-        payload
+        payload,
       });
-    }
+    },
   })
 )
 export default class Home extends React.Component {
@@ -39,35 +40,41 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const CartoonItem = ({
-      coverImage,
-      cartoonName,
-      updataTime,
-      toCheckDetail,
-    }) => (
-      <div className="cartoon-item" onClick={toCheckDetail}>
-        <img src={coverImage} />
-        <div className="cartoon-info-item">{cartoonName}</div>
-        <div className="cartoon-info-item">{updataTime}</div>
-      </div>
-    );
+    const { cartoonList } = this.props;
     return (
       <div className="Home-wrapper">
-        <div className="list-wrapper">
-          {this.props.cartoonList.map((item) => (
-            <CartoonItem
-              key={item._id}
-              {...item}
-              toCheckDetail={() => {
+        <List
+          className="cartoon-list-wrapper"
+          grid={{
+            gutter: 16,
+            column: 4,
+          }}
+          dataSource={cartoonList}
+          renderItem={(item) => (
+            <List.Item
+              onClick={() => {
                 this.props.dispatchSaveCartoonDetail(item);
-                this.props.dispatchChangeQueryCartoonDetailParams({collectionTag: item.collectionTag});
+                this.props.dispatchChangeQueryCartoonDetailParams({
+                  collectionTag: item.collectionTag,
+                });
                 this.props.history.push({
-                  pathname: "/cartoonDetail"
+                  pathname: "/cartoonDetail",
                 });
               }}
-            />
-          ))}
-        </div>
+            >
+              <Card
+                hoverable
+                style={{ width: 210 }}
+                cover={<img width={210} height={280} src={item.coverImage} />}
+              >
+                <Card.Meta
+                  title={item.cartoonName}
+                  description={`更新时间：${item.updataTime}`}
+                />
+              </Card>
+            </List.Item>
+          )}
+        />
       </div>
     );
   }
