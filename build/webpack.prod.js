@@ -46,6 +46,8 @@ module.exports = smart(base, {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/mian.[hash:8].css',
+      chunkFilename: 'css/[id].[hash:8].css',
+      ignoreOrder: true
     }),
     new webpack.BannerPlugin('当年明月在，曾照彩云归'),
     // new CopyWebpackPlugin([
