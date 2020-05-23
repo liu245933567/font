@@ -23,6 +23,7 @@ function RouterConfig({ history, app }) {
     console.log(`pathname...: ${pathname}`);
     console.log(search);
   });
+  console.log(history);
   const Home = dynamic({
     app,
     component: () => import("./Home"),
@@ -46,7 +47,7 @@ function RouterConfig({ history, app }) {
   return (
     <ConnectedRouter history={history}>
       <div className="wrapper">
-        <Nav/>
+        {history.location.pathname.indexOf('resume') < 1 && <Nav/>}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cartoonDetail" component={CartoonDetail} />

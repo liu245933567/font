@@ -1,36 +1,48 @@
 import React from "react";
 import resumeData from "./resume.json";
+import PropTypes from "prop-types";
 
 const BasicInfo = ({ basicinfo }) => {
+  const {
+    name,
+    description,
+    school,
+    profession,
+    sex,
+    education,
+    workage,
+    phone,
+    email,
+  } = basicinfo;
   return (
     <section className="basicinfo">
-      <div className="text-info name">{basicinfo.name}</div>
-      <div className="text-info description">{basicinfo.description}</div>
+      <div className="text-info name">{name}</div>
+      <div className="text-info description">{description}</div>
       <div className="text-info">
         <i className="fa fa-university"></i>
-        {basicinfo.school}·{basicinfo.profession}
+        {school}·{profession}
       </div>
       <div className="text-info">
         <i className="fa fa-user"></i>
-        {basicinfo.sex}·{basicinfo.education}·{basicinfo.workage}
+        {sex}·{education}·{workage}
       </div>
       <div className="phone text-info inline-block">
-        {!basicinfo.phone ? (
+        {!phone ? (
           ""
         ) : (
           <div>
             <i className="fa fa-phone"></i>
-            <a href={"tel:" + basicinfo.phone}>{basicinfo.phone}</a>
+            <a href={"tel:" + phone}>{phone}</a>
           </div>
         )}
       </div>
       <div className="email text-info inline-block">
-        {!basicinfo.email ? (
+        {!email ? (
           ""
         ) : (
           <div>
             <i className="fa fa-envelope-o"></i>
-            <a href={"mailto:" + basicinfo.email}>{basicinfo.email}</a>
+            <a href={"mailto:" + email}>{email}</a>
           </div>
         )}
       </div>
@@ -147,6 +159,20 @@ const Resume = () => {
       </div>
     </div>
   );
+};
+
+BasicInfo.propTypes = {
+  basicinfo: PropTypes.object,
+};
+Social.propTypes = {
+  social: PropTypes.array,
+};
+ExperienceList.propTypes = {
+  type: PropTypes.string,
+  experiences: PropTypes.array,
+};
+Experience.propTypes = {
+  experience: PropTypes.object,
 };
 
 export default Resume;
