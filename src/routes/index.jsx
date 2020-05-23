@@ -3,6 +3,7 @@ import { routerRedux, Switch, Route } from "dva/router";
 import { Spin } from "antd";
 import PropTypes from "prop-types";
 import dynamic from "dva/dynamic";
+import Nav from "../components/Nav";
 
 dynamic.setDefaultLoadingComponent(() => {
   return <Spin size="large" className="loading" />;
@@ -13,8 +14,9 @@ function RouterConfig({ history, app }) {
   history.listen(({ pathname, search }) => {
     console.log(`pathname...: ${pathname}`);
     console.log(search);
+    console.log(app);
   });
-  console.log(history);
+  console.log("有没有触发", history);
   const Home = dynamic({
     app,
     component: () => import("./Home"),
@@ -38,6 +40,14 @@ function RouterConfig({ history, app }) {
   return (
     <ConnectedRouter history={history}>
       <div className="wrapper">
+        <Nav
+          history={history}
+          handleClick={(e) => {
+            console.log(e);
+            history.push(e.key);
+          }}
+          current={history.location.pathname}
+        />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cartoonDetail" component={CartoonDetail} />
