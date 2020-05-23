@@ -6,6 +6,7 @@ const base = require('./webpack.base');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = smart(base, {
   mode: 'production',
@@ -59,6 +60,13 @@ module.exports = smart(base, {
       filename: 'css/mian.[hash:8].css',
       chunkFilename: 'css/[id].[hash:8].css',
       ignoreOrder: true
+    }),
+    new CompressionWebpackPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp('\\.(js|css)$'),
+      threshold: 10240,
+      minRatio: 0.8
     }),
     new webpack.BannerPlugin('当年明月在，曾照彩云归'),
     new CopyWebpackPlugin([
