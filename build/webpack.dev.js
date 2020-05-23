@@ -30,6 +30,15 @@ module.exports = smart(base, {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            enforce: 'pre' //强制之前执行
+          }
+        }
+      },
+      {
         test: /\.css$/,
         use: [
           'style-loader',

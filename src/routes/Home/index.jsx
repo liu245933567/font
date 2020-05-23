@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "dva";
-import { List, Card } from "antd";
+import { List, Card, Divider } from "antd";
 import PropTypes from "prop-types";
 
 @connect(
@@ -75,6 +75,9 @@ export default class Home extends React.Component {
             </List.Item>
           )}
         />
+
+        <Divider>欢迎提出宝贵意见</Divider>
+        <div className="footer-wrapper">我的QQ: 245933567 </div>
       </div>
     );
   }

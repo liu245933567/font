@@ -35,7 +35,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: pathResolve('src/index.html'),
-      filename: 'index.html'
+      filename: 'index.html',
+      favicon: pathResolve('src/favicon.ico')
     }),
     new HardSourceWebpackPlugin(),
     new CleanWebpackPlugin(),
@@ -62,15 +63,6 @@ module.exports = {
         test: /\.html$/,
         use: 'html-withimg-loader'
       },
-      // {
-      //   test: /\.js$/,
-      //   use: {
-      //     loader: 'eslint-loader',
-      //     options: {
-      //       enforce: 'pre' //强制之前执行
-      //     }
-      //   }
-      // },
       {
         test: /\.(js|jsx)$/,
         include: pathResolve('src'),
@@ -95,12 +87,11 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|ttf|eot|svg|woff|woff2)$/,
         use: {
           loader: 'url-loader',
           options: {
-            // limit: 200 * 1024,
-            limit: 1,
+            limit: 10 * 1024,
             esModule: false,
             outputPath: 'img/'
           }

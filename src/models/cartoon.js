@@ -32,6 +32,7 @@ export default {
     },
 
     // 获取动漫详情
+    // eslint-disable-next-line no-unused-vars
     *getCartoonDeatil({ payload }, { call, put, select }) {
       const { queryCartoonDetailParams } = yield select((state) => state.cartoon);
       const { data } = yield call(cartoonDetail, queryCartoonDetailParams);

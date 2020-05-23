@@ -5,14 +5,6 @@ import PropTypes from "prop-types";
 import dynamic from "dva/dynamic";
 import Nav from "../components/Nav";
 
-// import Home from './Home';
-// import CartoonDetail from './CartoonDetail';
-// import SectionDetail from './SectionDetail';
-
-// const Home = import("./Home");
-// const CartoonDetail = import("./CartoonDetail");
-// const SectionDetail = import("./SectionDetail");
-
 dynamic.setDefaultLoadingComponent(() => {
   return <Spin size="large" className="loading" />;
 });
@@ -22,7 +14,9 @@ function RouterConfig({ history, app }) {
   history.listen(({ pathname, search }) => {
     console.log(`pathname...: ${pathname}`);
     console.log(search);
+    console.log(app);
   });
+  console.log("有没有触发", history);
   const Home = dynamic({
     app,
     component: () => import("./Home"),
@@ -39,15 +33,27 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import("./Login"),
   });
+  const Resume = dynamic({
+    app,
+    component: () => import("./Resume"),
+  });
   return (
     <ConnectedRouter history={history}>
       <div className="wrapper">
-        <Nav/>
+        <Nav
+          history={history}
+          handleClick={(e) => {
+            console.log(e);
+            history.push(e.key);
+          }}
+          current={history.location.pathname}
+        />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cartoonDetail" component={CartoonDetail} />
           <Route exact path="/sectionDetail" component={SectionDetail} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/resume" component={Resume} />
         </Switch>
       </div>
     </ConnectedRouter>
