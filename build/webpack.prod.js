@@ -1,10 +1,11 @@
 const { smart } = require('webpack-merge');
+const { pathResolve } = require('./utils');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const base = require('./webpack.base');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = smart(base, {
   mode: 'production',
@@ -24,7 +25,12 @@ module.exports = smart(base, {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           'css-loader',
           'postcss-loader'
         ]
@@ -32,7 +38,12 @@ module.exports = smart(base, {
       {
         test: /\.less$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           'css-loader',
           'postcss-loader',
           'less-loader'
@@ -50,11 +61,11 @@ module.exports = smart(base, {
       ignoreOrder: true
     }),
     new webpack.BannerPlugin('当年明月在，曾照彩云归'),
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: '../doc',
-    //     to: '../dist'
-    //   }
-    // ])
+    new CopyWebpackPlugin([
+      {
+        from: pathResolve('doc'),
+        to: pathResolve('dist')
+      }
+    ])
   ]
 })

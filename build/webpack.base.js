@@ -8,7 +8,7 @@ module.exports = {
     home: pathResolve('src/app.js')
   },
   output: {
-    filename: '[name].[hash:8].js',
+    filename: 'js/[name].[hash:8].js',
     path: pathResolve('dist'),
   },
   optimization: {
