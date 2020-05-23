@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import PropTypes from "prop-types";
+import { Radio } from "antd";
 // import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
 
@@ -36,11 +37,16 @@ class Account extends React.Component {
   }
 
   render() {
-    // const { sectionList } = this.props;
     return (
       <div className="Account-page-wrapper">
-        {/* <LoginForm /> */}
-        <RegisterForm/>
+        <div className="form-wrapper">
+          <Radio.Group defaultValue="login" size="large">
+            <Radio.Button value="login">登录</Radio.Button>
+            <Radio.Button value="register">注册</Radio.Button>
+          </Radio.Group>
+          {/* <LoginForm /> */}
+          <RegisterForm />
+        </div>
       </div>
     );
   }
