@@ -34,6 +34,7 @@ export default class SectionDetail extends React.Component {
           className="con-btn"
           onClick={() => {
             dispatchGetSectionDeatil({ queryType: "prev", sectionId });
+            scrollTo(0,0);
           }}
         >
           上一章
@@ -42,6 +43,7 @@ export default class SectionDetail extends React.Component {
           className="con-btn"
           onClick={() => {
             dispatchGetSectionDeatil({ queryType: "next", sectionId });
+            scrollTo(0,0);
           }}
         >
           下一章
