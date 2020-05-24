@@ -1,5 +1,5 @@
 import React from "react";
-import resumeData from "./resume.json";
+import resumeData from "./resume";
 import PropTypes from "prop-types";
 
 const BasicInfo = ({ basicinfo }) => {
@@ -50,36 +50,48 @@ const BasicInfo = ({ basicinfo }) => {
   );
 };
 
-const Social = ({ social }) => (
-  <section className="social">
-    {social.map(function (item) {
-      //如果有icon 优先使用icon
-      if (!item.icon) {
-        return (
-          <a
-            className={"fa fa-" + item.type}
-            href={item.link}
-            key={item.type + item.link}
-          ></a>
-        );
-      }
-      return (
-        <a href={item.link} key={item.type + item.link}>
-          <img src={item.icon} />
-        </a>
-      );
-    })}
-  </section>
-);
+const Social = ({ social }) => {
+  if (!social || social.length === 0) {
+    return null;
+  } else {
+    return (
+      <section className="social">
+        {social.map(function (item) {
+          //如果有icon 优先使用icon
+          if (!item.icon) {
+            return (
+              <a
+                className={"fa fa-" + item.type}
+                href={item.link}
+                key={item.type + item.link}
+              ></a>
+            );
+          }
+          return (
+            <a href={item.link} key={item.type + item.link}>
+              <img src={item.icon} />
+            </a>
+          );
+        })}
+      </section>
+    );
+  }
+};
 
-const ExperienceList = ({ type, experiences }) => (
-  <section className="experiencelist">
-    <div className="experience-type">{type}</div>
-    {experiences.map(function (experience) {
-      return <Experience experience={experience} key={experience.name} />;
-    })}
-  </section>
-);
+const ExperienceList = ({ type, experiences }) => {
+  if (!experiences || experiences.length === 0) {
+    return null;
+  } else {
+    return (
+      <section className="experiencelist">
+        <div className="experience-type">{type}</div>
+        {experiences.map(function (experience) {
+          return <Experience experience={experience} key={experience.name} />;
+        })}
+      </section>
+    );
+  }
+};
 
 const Experience = ({ experience }) => (
   <section className="experience">
@@ -136,7 +148,7 @@ const Resume = () => {
   };
 
   return (
-    <div id="">
+    <div id="container">
       <div className="resume-container animated fadeInUp">
         <header style={header_style}>
           <img className="avatar" src={resume.avatar} />

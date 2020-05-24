@@ -1,4 +1,4 @@
-{
+export default {
   "avatar": "http://i.zhongwei100.com/mh/cover/2019/11/19/10b64a5544.jpg/420",
   "background_image": "https://9to5mac.files.wordpress.com/2014/08/yosemite-3.jpg?w=1200&h=&crop=1",
   "basicinfo": {
@@ -12,6 +12,7 @@
     "phone": "17862514397",
     "email": "liuyonghui1996@gmail.com"
   },
+  // 社交方式
   "social": [
     {
       "type": "github",
@@ -39,6 +40,7 @@
       "icon": ""
     }
   ],
+  // 获得奖项
   "Awards": [
     {
       "name": "中山大学第十三/四届学术科技节之软件大赛一等奖(蝉联2年第一)"
@@ -56,6 +58,7 @@
       "name": "201X华南XX杯广东省Java程序员竞赛三等奖"
     }
   ],
+  // 社团经历
   "socialExperiences": [
     {
       "name": "加入XX移动开发工作室",
@@ -68,6 +71,7 @@
       "description": "受Ruby China Conf启发，也地处三线城市IT氛围不浓厚，所以自行组织了3次交流会"
     }
   ],
+  // 实习经历
   "InternExperiences": [
     {
       "name": "深圳XX网络科技有限公司",
@@ -88,11 +92,12 @@
       "location": "广东 江门"
     }
   ],
+  // 项目经验
   "ProjectExperience": [
     {
-      "name": "XTips",
+      "name": "中国联合航空 m网、微信公众号",
       "name_link": "https://github.com/Jayin",
-      "title": "Android App, 作者",
+      "title": "H5, 开发者",
       "icon": "",
       "description": "中山大学校园助手，2一键导入课程表/图书检索、收藏/及时获取校园资讯/查空课室/电费, 已为7+K同学服务",
       "time": "2013.07 - 至今",
