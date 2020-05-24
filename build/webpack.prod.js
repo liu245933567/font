@@ -16,8 +16,13 @@ module.exports = smart(base, {
         cache: true,
         parallel: true,
         sourceMap: true,
-        drop_debugger: true,
-        drop_console: true
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            drop_debugger: true,
+            drop_console: true
+          }
+        }
       }),
       new OptimizeCssAssetsWebpackPlugin()
     ]
