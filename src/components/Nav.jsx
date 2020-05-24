@@ -9,11 +9,19 @@ export default class Nav extends React.Component {
 
   render() {
     console.log(this.props.history);
+    const {
+      handleClick,
+      history
+    } = this.props;
+    if(history.location.pathname === '/resume'){
+      return null;
+    }
+
     return (
       <Menu
-      className="Nav-wrapper"
-        onClick={this.props.handleClick}
-        selectedKeys={[this.props.history.location.pathname]}
+        className="Nav-wrapper"
+        onClick={handleClick}
+        selectedKeys={[history.location.pathname]}
         mode="horizontal"
       >
         <Menu.Item key="/">我的漫画</Menu.Item>
@@ -24,5 +32,5 @@ export default class Nav extends React.Component {
 
 Nav.propTypes = {
   handleClick: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
