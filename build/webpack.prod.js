@@ -18,7 +18,6 @@ module.exports = smart(base, {
         sourceMap: true,
         uglifyOptions: {
           compress: {
-            warnings: false,
             drop_debugger: true,
             drop_console: true
           }
