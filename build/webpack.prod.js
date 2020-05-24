@@ -15,7 +15,9 @@ module.exports = smart(base, {
       new UglifyjsWebpackPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true
+        sourceMap: true,
+        drop_debugger: true,
+        drop_console: true
       }),
       new OptimizeCssAssetsWebpackPlugin()
     ]
