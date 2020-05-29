@@ -1,4 +1,4 @@
-import { cartoonDetail, cartoonList, sectionDetail } from '../services/cartoon';
+import { cartoonDetail, cartoonList, sectionDetail } from 'services/cartoon';
 
 export default {
   namespace: 'cartoon',

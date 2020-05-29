@@ -1,4 +1,4 @@
-import { messageError } from '../utils';
+import { messageError } from 'utils';
 
 export default {
   namespace: 'global', // model 的命名空间，同时也是他在全局 state 上的属性，只能用字符串，不支持通过 . 的方式创建多层命名空间

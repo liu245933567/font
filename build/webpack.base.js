@@ -1,11 +1,12 @@
 const { pathResolve } = require('./utils');
+const alias = require('./alias');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
   entry: {
-    home: pathResolve('src/app.js')
+    home: pathResolve('src/modules/cartoon/app.js')
   },
   output: {
     filename: 'js/[name].[hash:8].js',
@@ -34,9 +35,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: pathResolve('src/index.html'),
+      template: pathResolve('src/modules/cartoon/index.html'),
       filename: 'index.html',
-      favicon: pathResolve('src/favicon.ico')
+      favicon: pathResolve('src/assets/favicon.ico')
     }),
     new HardSourceWebpackPlugin(),
     new CleanWebpackPlugin(),
@@ -50,11 +51,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.css', '.vue', '.less'],
     mainFields: ['style', 'main'],
     // mainFiles: [],
-    alias: {
-      bootstrap: 'bootstrap/dist/css/bootstrap.css',
-      config: pathResolve('src/config/index.js'),
-      http: pathResolve('src/http/index.js')
-    }
+    alias
   },
 
   module: {
