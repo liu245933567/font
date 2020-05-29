@@ -6,7 +6,8 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
   entry: {
-    home: pathResolve('src/modules/cartoon/app.js')
+    home: pathResolve('src/modules/cartoon/app.js'),
+    resume: pathResolve('src/modules/resume/app.js')
   },
   output: {
     filename: 'js/[name].[hash:8].js',
@@ -37,6 +38,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: pathResolve('src/modules/cartoon/index.html'),
       filename: 'index.html',
+      favicon: pathResolve('src/assets/favicon.ico')
+    }),
+    new HtmlWebpackPlugin({
+      template: pathResolve('src/modules/resume/resume.html'),
+      filename: 'resume.html',
       favicon: pathResolve('src/assets/favicon.ico')
     }),
     new HardSourceWebpackPlugin(),

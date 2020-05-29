@@ -33,10 +33,6 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import("./Login"),
   });
-  const Resume = dynamic({
-    app,
-    component: () => import("./Resume"),
-  });
   return (
     <ConnectedRouter history={history}>
       <div className="wrapper">
@@ -53,7 +49,6 @@ function RouterConfig({ history, app }) {
           <Route exact path="/cartoonDetail" component={CartoonDetail} />
           <Route exact path="/sectionDetail" component={SectionDetail} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/resume" component={Resume} />
         </Switch>
       </div>
     </ConnectedRouter>
