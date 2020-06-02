@@ -55,7 +55,7 @@ export default class Home extends React.Component {
               onClick={() => {
                 this.props.dispatchSaveCartoonDetail(item);
                 this.props.dispatchChangeQueryCartoonDetailParams({
-                  collectionTag: item.collectionTag,
+                  cartoonId: item.cartoonId,
                 });
                 this.props.history.push({
                   pathname: "/cartoonDetail",

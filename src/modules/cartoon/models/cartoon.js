@@ -8,7 +8,7 @@ export default {
     selectedCartoon: {},
     // 查询动漫详情的参数
     queryCartoonDetailParams: {
-      collectionTag: '',
+      cartoonId: 0,
       sortType: -1,
       pageIndex: 1,
       pageSize: 2000
@@ -39,7 +39,7 @@ export default {
       if (data && data.isOk) {
         yield put({
           type: 'changeSectionList',
-          payload: data.sectioList,
+          payload: data.sectionList,
         });
       }
     },
@@ -48,7 +48,7 @@ export default {
     *getSectionDeatil({ payload }, { call, put, select }) {
       let { sectionId, queryType } = payload;
       const { queryCartoonDetailParams, sectionList } = yield select((state) => state.cartoon);
-      const { collectionTag, sortType } = queryCartoonDetailParams;
+      const { cartoonId, sortType } = queryCartoonDetailParams;
 
       const sectionIndex = sectionList.findIndex(item => item.sectionId === sectionId);
       const
@@ -64,7 +64,7 @@ export default {
         sectionId = sectionList[nextIndex].sectionId;
       }
       
-      const { data } = yield call(sectionDetail, { sectionId, collectionTag });
+      const { data } = yield call(sectionDetail, { sectionId, cartoonId });
       if (data && data.isOk) {
         yield put({
           type: 'changeSectionDeatil',

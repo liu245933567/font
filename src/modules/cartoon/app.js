@@ -11,21 +11,21 @@ import RouterConfig from './routes';
 import global from './models/global';
 import cartoon from './models/cartoon';
 
-const getInitState = () => {
-  const dvaState = store.get('dvaState');
-  if (dvaState) {
-    return {
-      cartoon: dvaState.cartoon
-    }
-  } else {
-    return {}
-  }
-}
+// const getInitState = () => {
+//   const dvaState = store.get('dvaState');
+//   if (dvaState) {
+//     return {
+//       cartoon: dvaState.cartoon
+//     }
+//   } else {
+//     return {}
+//   }
+// }
 
 // 1. 创建应用，返回 dva 实例
 const app = dva({
   // history: browserHistory(),
-  initialState: getInitState(),
+  // initialState: getInitState(),
   onError(e) {
     message.error(e.message, /* duration */3);
   },

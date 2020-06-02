@@ -19,7 +19,7 @@ const createFiles = function () {
         });
     }
     return result;
-};//欢迎加入前端全栈开发交流圈一起学习交流：864305860
+};
 
 const plugins = function () {
     const files = createFiles();
@@ -35,10 +35,10 @@ const plugins = function () {
                 filename: `${file.name}.html`,
                 template: file.templatePath,
                 chunks: [file.name]
-            })//欢迎加入前端全栈开发交流圈一起学习交流：864305860
-        );//面向1-3年前端人员
+            })
+        );
         Entries[file.name] = file.jsPath;
-    });//帮助突破技术瓶颈，提升思维能力
+    });
 
     return {
         plugins: [
@@ -49,6 +49,6 @@ const plugins = function () {
                 }
             })
         ],
-        Entries//欢迎加入前端全栈开发交流圈一起学习交流：864305860
-    };//面向1-3年前端人员
-};//帮助突破技术瓶颈，提升思维能力
+        Entries
+    };
+};
