@@ -13,18 +13,12 @@ import RegisterForm from "../../components/RegisterForm";
     };
   },
   (dispatch) => ({
-    dispatchGetSectionList(payload) {
+    dispatchToLogin(payload) {
       dispatch({
-        type: "cartoon/getCartoonDeatil",
+        type: "user/toLogin",
         payload,
       });
-    },
-    dispatchGetSectionDeatil(payload) {
-      dispatch({
-        type: "cartoon/getSectionDeatil",
-        payload,
-      });
-    },
+    }
   })
 )
 class Account extends React.Component {
@@ -33,7 +27,7 @@ class Account extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchGetSectionList();
+    this.props.dispatchToLogin({});
   }
 
   render() {
@@ -53,11 +47,8 @@ class Account extends React.Component {
 }
 
 Account.propTypes = {
-  sectionList: PropTypes.array,
-  dispatchGetSectionList: PropTypes.func,
-  dispatchGetSectionDeatil: PropTypes.func,
-  history: PropTypes.object,
-  queryCartoonDetailParams: PropTypes.object,
+  dispatchToLogin: PropTypes.func,
+  history: PropTypes.object
 };
 
 export default Account;

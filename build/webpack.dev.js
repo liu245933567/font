@@ -6,7 +6,8 @@ const {pathResolve, getIP} = require('./utils');
 module.exports = smart(base, {
   mode: 'development',
   devServer: {
-    host: getIP(),
+    // host: getIP(),
+    host: 'dev.yanyuge.xyz',
     hot: true,
     port: 8200,
     disableHostCheck: true,
@@ -20,6 +21,12 @@ module.exports = smart(base, {
     // }
     proxy: {
       '/cartoon': {
+        target: 'http://localhost:3000',
+        // pathRewrite: {
+        //   '/api': ''
+        // }
+      },
+      '/user': {
         target: 'http://localhost:3000',
         // pathRewrite: {
         //   '/api': ''

@@ -10,6 +10,7 @@ import './style/main.less';
 import RouterConfig from './routes';
 import global from './models/global';
 import cartoon from './models/cartoon';
+import user from './models/user';
 
 // const getInitState = () => {
 //   const dvaState = store.get('dvaState');
@@ -41,6 +42,7 @@ const app = dva({
 // 3. 注册 model
 app.model(global);
 app.model(cartoon);
+app.model(user);
 
 // 4. 注册路由表
 app.router(RouterConfig);
