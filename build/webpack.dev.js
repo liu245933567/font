@@ -28,9 +28,9 @@ module.exports = smart(base, {
       },
       '/user': {
         target: 'http://localhost:3000',
-        // pathRewrite: {
-        //   '/api': ''
-        // }
+      },
+      '/admin': {
+        target: 'http://localhost:3000',
       }
     }
   },

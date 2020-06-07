@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "dva";
 import PropTypes from "prop-types";
 import { Radio } from "antd";
-// import LoginForm from "../../components/LoginForm";
+import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
 
 @connect(
@@ -18,28 +18,55 @@ import RegisterForm from "../../components/RegisterForm";
         type: "user/toLogin",
         payload,
       });
-    }
+    },
   })
 )
 class Account extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      curType: "login",
+    };
   }
 
   componentDidMount() {
-    this.props.dispatchToLogin({});
+    
   }
 
   render() {
+    const { curType } = this.state;
     return (
       <div className="Account-page-wrapper">
         <div className="form-wrapper">
-          <Radio.Group defaultValue="login" size="large">
+          <Radio.Group
+            defaultValue="login"
+            size="large"
+            onChange={(event) => {
+              this.setState({
+                curType: event.target.value,
+              });
+            }}
+          >
             <Radio.Button value="login">登录</Radio.Button>
             <Radio.Button value="register">注册</Radio.Button>
           </Radio.Group>
-          {/* <LoginForm /> */}
-          <RegisterForm />
+          {curType === "login" ? (
+            <LoginForm
+              toLogin={(value) => {
+                console.log(value);
+                const {
+                  phoneNo,
+                  password
+                } = value;
+                this.props.dispatchToLogin({
+                  phoneNo,
+                  password
+                });
+              }}
+            />
+          ) : (
+            <RegisterForm />
+          )}
         </div>
       </div>
     );
@@ -48,7 +75,7 @@ class Account extends React.Component {
 
 Account.propTypes = {
   dispatchToLogin: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default Account;

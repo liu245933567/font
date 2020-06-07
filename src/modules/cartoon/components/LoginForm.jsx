@@ -1,26 +1,24 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
-const Login = () => {
+const Login = ({toLogin}) => {
   return (
     <div className="Login-components-wrapper">
       <Form
         name="normal_login"
         className="login-form"
         initialValues={{ remember: true }}
-        onFinish={(values) => {
-          console.log("Received values of form: ", values);
-        }}
+        onFinish={toLogin}
       >
         <Form.Item
-          name="userName"
-          rules={[{ required: true, message: "请输入用户名!" }]}
+          name="phoneNo"
+          rules={[{ required: true, message: "请输入手机号!" }]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="用户名"
+            placeholder="手机号"
           />
         </Form.Item>
         <Form.Item
@@ -38,9 +36,7 @@ const Login = () => {
             <Checkbox>记住密码</Checkbox>
           </Form.Item>
 
-          <a className="login-form-forgot" href="">
-            忘记密码
-          </a>
+          <a className="login-form-forgot" href="">忘记密码</a>
         </Form.Item>
 
         <Form.Item>
@@ -59,6 +55,7 @@ const Login = () => {
 };
 
 Login.propTypes = {
+  toLogin: PropTypes.func
 };
 
 export default Login;

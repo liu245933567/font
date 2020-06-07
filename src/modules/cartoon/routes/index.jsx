@@ -29,6 +29,10 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import("./SectionDetail"),
   });
+  const TestPage = dynamic({
+    app,
+    component: () => import("./TestPage"),
+  });
   const Login = dynamic({
     app,
     component: () => import("./Login"),
@@ -49,6 +53,7 @@ function RouterConfig({ history, app }) {
           <Route exact path="/cartoonDetail" component={CartoonDetail} />
           <Route exact path="/sectionDetail" component={SectionDetail} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/test" component={TestPage} />
         </Switch>
       </div>
     </ConnectedRouter>

@@ -60,9 +60,11 @@
     "dva": "^2.4.1",
     "history": "^4.10.1",
     "jquery": "^3.5.0",
+    "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
+    "socket.io-client": "^2.3.0",
     "store": "^2.0.12"
   }
 }
