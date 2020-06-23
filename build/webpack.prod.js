@@ -63,7 +63,7 @@ module.exports = smart(base, {
       ENV: JSON.stringify('production')
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/mian.[hash:8].css',
+      filename: 'css/[name].mian.[hash:8].css',
       chunkFilename: 'css/[id].[hash:8].css',
       ignoreOrder: true
     }),
