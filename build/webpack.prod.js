@@ -56,6 +56,20 @@ module.exports = smart(base, {
           'less-loader'
         ]
       },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          "css-loader",
+          "postcss-loader",
+          "sass-loader"
+        ]
+      }
     ]
   },
   plugins: [

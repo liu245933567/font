@@ -6,8 +6,9 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
   entry: {
-    home: pathResolve('src/modules/cartoon/app.js'),
-    resume: pathResolve('src/modules/resume/app.js')
+    backOffice: pathResolve('src/modules/cartoon/app.js'),
+    resume: pathResolve('src/modules/resume/app.js'),
+    home: pathResolve('src/modules/home/app.js')
   },
   output: {
     filename: 'js/[name].[hash:8].js',
@@ -39,13 +40,19 @@ module.exports = {
       template: pathResolve('src/modules/cartoon/index.html'),
       filename: 'index.html',
       favicon: pathResolve('src/assets/favicon.ico'),
-      chunks:['home']
+      chunks:['backOffice']
     }),
     new HtmlWebpackPlugin({
       template: pathResolve('src/modules/resume/resume.html'),
       filename: 'resume.html',
       favicon: pathResolve('src/assets/favicon.ico'),
       chunks:['resume']
+    }),
+    new HtmlWebpackPlugin({
+      template: pathResolve('src/modules/home/home.html'),
+      filename: 'home.html',
+      favicon: pathResolve('src/assets/favicon.ico'),
+      chunks:['home']
     }),
     new HardSourceWebpackPlugin(),
     new CleanWebpackPlugin(),
@@ -83,10 +90,8 @@ module.exports = {
               ["@babel/plugin-proposal-decorators", { "legacy": true }],
               ["@babel/plugin-proposal-class-properties", { "loose": true }],
               "@babel/plugin-transform-runtime",
-              [
-                "import",
-                { libraryName: "antd", style: 'css' } // 移动端添加 "libraryName": "antd-mobile"
-              ]
+              ["import", { libraryName: "antd", style: 'css' }, "antd"],
+              ["import", { libraryName: "antd-mobile", style: "css" }, "antd-mobile"]
             ]
           }
         }

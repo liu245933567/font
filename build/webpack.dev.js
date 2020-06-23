@@ -10,7 +10,8 @@ module.exports = smart(base, {
   mode: "development",
   devServer: {
     // host: getIP(),
-    host: "dev.yanyuge.xyz",
+    // host: "dev.yanyuge.xyz",
+    host: "0.0.0.0",
     hot: true,
     port: 8200,
     disableHostCheck: true,
@@ -50,12 +51,16 @@ module.exports = smart(base, {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"]
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"]
       },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
+      }
     ],
   },
   devtool: "source-map",
