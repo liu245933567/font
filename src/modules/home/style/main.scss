@@ -1,4 +1,9 @@
+@import './variable.scss';
 @import './adaptor.scss';
 
 // 容器样式
 @import './container/home.scss';
+@import './container/cinema.scss';
+
+// 组件样式
+@import './components/video.scss';

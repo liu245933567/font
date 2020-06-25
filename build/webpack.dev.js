@@ -36,6 +36,9 @@ module.exports = smart(base, {
       "/admin": {
         target: "http://localhost:3000",
       },
+      "/video": {
+        target: "http://localhost:3000",
+      },
     },
   },
   module: {

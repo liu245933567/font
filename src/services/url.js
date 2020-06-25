@@ -12,3 +12,6 @@ export const cartoonListURL = '/cartoon/cartoonList.json';
 export const cartoonDetailURL = '/cartoon/cartoonDetail.json';
 // 章节详情
 export const sectionDetailURL = '/cartoon/sectionDetail.json';
+
+// 视频列表
+export const videoListURL = '/video/videoList.json';

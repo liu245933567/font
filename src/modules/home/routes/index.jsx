@@ -3,6 +3,7 @@ import { routerRedux, Switch, Route } from "dva/router";
 import PropTypes from "prop-types";
 import dynamic from "dva/dynamic";
 import HomeCom from "./home";
+import CinemaCom from "./cinema";
 import { NavBar, Icon } from "antd-mobile";
 
 dynamic.setDefaultLoadingComponent(() => {
@@ -21,6 +22,10 @@ function RouterConfig({ history, app }) {
     app,
     component: () => HomeCom,
   });
+  const Cinema = dynamic({
+    app,
+    component: () => CinemaCom,
+  });
   return (
     <ConnectedRouter history={history}>
       <div className="wrapper">
@@ -37,6 +42,7 @@ function RouterConfig({ history, app }) {
         </NavBar>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/cinema" component={Cinema} />
         </Switch>
       </div>
     </ConnectedRouter>
