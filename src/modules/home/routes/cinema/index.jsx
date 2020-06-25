@@ -3,8 +3,9 @@ import { connect } from "dva";
 import PropTypes from "prop-types";
 import { Grid } from "antd-mobile";
 import Video from "../../components/Video";
+import Scroll from "../../components/Scroll";
 // import {HOST} from 'config'
-const HOST = 'http://192.168.31.63:3000'
+const HOST = "http://192.168.31.71:3000";
 
 @connect(
   (state) => {
@@ -39,7 +40,7 @@ export default class Cinema extends React.Component {
     return (
       <div className="Cinema_Page_Wrapper">
         <div>
-          {(videoSource || videoList[0]) ? (
+          {videoSource || videoList[0] ? (
             <Video
               sources={[
                 {
@@ -51,32 +52,34 @@ export default class Cinema extends React.Component {
           ) : (
             <div className="liubai"></div>
           )}
-          <div className="video_info_wrapper">
-            <Grid
-              data={videoList}
-              columnNum={2}
-              renderItem={(videoItem) => (
-                <div
-                  onClick={() => {
-                    // this.props.history.push({
-                    //   pathname: "/cinema",
-                    // });
-                    this.setState({
-                      videoSource: `${HOST}${videoItem.videoUrl}`
-                    })
-                  }}
-                >
-                  <img
-                    className="cartoon_coverImage"
-                    src={`${HOST}${videoItem.previewImgUrl}`}
-                  />
-                  <div>
-                    <span>{videoItem.fileName}</span>
+          <Scroll>
+            <div className="video_info_wrapper">
+              <Grid
+                data={videoList}
+                columnNum={2}
+                renderItem={(videoItem) => (
+                  <div
+                    onClick={() => {
+                      // this.props.history.push({
+                      //   pathname: "/cinema",
+                      // });
+                      this.setState({
+                        videoSource: `${HOST}${videoItem.videoUrl}`,
+                      });
+                    }}
+                  >
+                    <img
+                      className="cartoon_coverImage"
+                      src={`${HOST}${videoItem.previewImgUrl}`}
+                    />
+                    <div>
+                      <span>{videoItem.fileName}</span>
+                    </div>
                   </div>
-                </div>
-              )}
-            />
-          </div>
+                )}
+              />
+            </div>
+          </Scroll>
         </div>
       </div>
     );

@@ -61,6 +61,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "dva": "^2.4.1",
+    "better-scroll": "^1.15.2",
     "history": "^4.10.1",
     "jquery": "^3.5.0",
     "video.js": "^7.6.6",

@@ -5,6 +5,7 @@ const {
   pathResolve,
   // getIP
 } = require("./utils");
+const proxyHost = 'http://192.168.31.71:3000';
 
 module.exports = smart(base, {
   mode: "development",
@@ -25,19 +26,19 @@ module.exports = smart(base, {
     // }
     proxy: {
       "/cartoon": {
-        target: "http://localhost:3000",
+        target: proxyHost,
         // pathRewrite: {
         //   '/api': ''
         // }
       },
       "/user": {
-        target: "http://localhost:3000",
+        target: proxyHost,
       },
       "/admin": {
-        target: "http://localhost:3000",
+        target: proxyHost,
       },
       "/video": {
-        target: "http://localhost:3000",
+        target: proxyHost,
       },
     },
   },
