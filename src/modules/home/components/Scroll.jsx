@@ -179,7 +179,7 @@ Scroll.propTypes = {
   /** 没有更多了提示 */
   noMoreText: PropTypes.string,
   /** 插槽内容 */
-  children: PropTypes.elementType,
+  // children: PropTypes.elementType,
   /** input className */
   inputClassName: PropTypes.string,
 };
@@ -202,7 +202,7 @@ Scroll.defaultProps = {
   pullDownText: "下拉刷新",
   pullUpText: "上拉加载更多",
   noMoreText: "没有更多了",
-  children: null,
+  // children: null,
   inputClassName: ''
 };
 
