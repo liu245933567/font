@@ -28,23 +28,10 @@ function RouterConfig({ history, app }) {
   });
   return (
     <ConnectedRouter history={history}>
-      <div className="wrapper">
-        <NavBar
-          mode="light"
-          icon={<Icon type="left" />}
-          onLeftClick={() => console.log("onLeftClick")}
-          rightContent={[
-            <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
-            <Icon key="1" type="ellipsis" />,
-          ]}
-        >
-          烟雨阁
-        </NavBar>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/cinema" component={Cinema} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/cinema" component={Cinema} />
+      </Switch>
     </ConnectedRouter>
   );
 }
