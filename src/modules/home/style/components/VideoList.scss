@@ -16,6 +16,7 @@
       .video_preview_wrapper {
         height: 2.6rem /* 195/75 */;
         position: relative;
+        overflow: hidden;
         .video_preview_src {
           width: 100%;
         }
@@ -60,6 +61,9 @@
         line-height: 0.4rem;
         font-size: 0.32rem;
         margin-top: $smallInterval;
+        &_watching {
+          color: $activeColor;
+        }
       }
     }
   }

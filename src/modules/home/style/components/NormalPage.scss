@@ -4,7 +4,11 @@
   height: 100%;
   margin: auto;
   flex-direction: column;
+  .NormalPage_Header_wrapper{
+    height: $headerHeight;
+  }
   .NormalPage_Content_wrapper{
-    flex: 1;
+    // flex: 1;
+    height: 100%;
   }
 }

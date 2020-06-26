@@ -3,7 +3,7 @@
  * @Description: 公共页面模板组件
  * @Date: 2020-06-26 11:45:27
  * @Last Modified by: LiuYh
- * @Last Modified time: 2020-06-26 14:39:09
+ * @Last Modified time: 2020-06-26 20:22:51
  */
 
 import React from "react";
@@ -21,7 +21,7 @@ class NormalPage extends React.Component {
       <div className="NormalPage_Component_Wrapper">
         {/* 头部 */}
         {showHeader && (
-          <header>
+          <header className="NormalPage_Header_wrapper">
             <NavBar
               mode="light"
               icon={<Icon type="left" />}

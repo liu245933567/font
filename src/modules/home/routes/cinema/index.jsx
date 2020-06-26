@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "dva";
 import PropTypes from "prop-types";
-import { Grid } from "antd-mobile";
 import Video from "../../components/Video";
 import Scroll from "../../components/Scroll";
-// import {HOST} from 'config'
+import VideoList from "../../components/VideoList";
+import NormalPage from "../../components/NormalPage";
 const HOST = "http://192.168.31.71:3000";
 
 @connect(
@@ -28,23 +28,36 @@ export default class Cinema extends React.Component {
     this.state = {
       videoSource: "",
     };
+    this.changeVideoSource = this.changeVideoSource.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatchGetVideoList({});
   }
 
+  /**
+   * 切换视频源
+   * @param {Object} video
+   */
+  changeVideoSource(video) {
+    this.setState({
+      videoSource: `${HOST}${video.videoUrl}`,
+    });
+  }
+
   render() {
     const { videoList } = this.props;
     const { videoSource } = this.state;
+    /** 列表第一个元素的地址 */
+    const firstVideoSource = videoList[0] && `${HOST}${videoList[0].videoUrl}`;
     return (
-      <div className="Cinema_Page_Wrapper">
-        <div>
-          {videoSource || videoList[0] ? (
+      <NormalPage>
+        <div className="Cinema_Page_Wrapper">
+          {videoSource || firstVideoSource ? (
             <Video
               sources={[
                 {
-                  src: videoSource || `${HOST}${videoList[0].videoUrl}`,
+                  src: videoSource || firstVideoSource,
                   type: "video/mp4",
                 },
               ]}
@@ -53,35 +66,14 @@ export default class Cinema extends React.Component {
             <div className="liubai"></div>
           )}
           <Scroll>
-            <div className="video_info_wrapper">
-              <Grid
-                data={videoList}
-                columnNum={2}
-                renderItem={(videoItem) => (
-                  <div
-                    onClick={() => {
-                      // this.props.history.push({
-                      //   pathname: "/cinema",
-                      // });
-                      this.setState({
-                        videoSource: `${HOST}${videoItem.videoUrl}`,
-                      });
-                    }}
-                  >
-                    <img
-                      className="cartoon_coverImage"
-                      src={`${HOST}${videoItem.previewImgUrl}`}
-                    />
-                    <div>
-                      <span>{videoItem.fileName}</span>
-                    </div>
-                  </div>
-                )}
-              />
-            </div>
+            <VideoList
+              videoList={videoList}
+              currentVideoKey={videoSource || firstVideoSource}
+              chooseHandle={this.changeVideoSource}
+            />
           </Scroll>
         </div>
-      </div>
+      </NormalPage>
     );
   }
 }
