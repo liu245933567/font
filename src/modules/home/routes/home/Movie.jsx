@@ -31,20 +31,34 @@ import PropTypes from "prop-types";
 class Movie extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      curCategory: ''
+    }
   }
 
   componentDidMount() {
-    // this.props.dispatchGetVideoList({});
     this.props.dispatchGetVideoCategories({});
   }
   render() {
     const { videoList, categoryList } = this.props;
+    const{curCategory}=this.state;
     console.log("videoList", videoList);
     return (
       <div className="Movie_Page_Wrapper">
-        <NavScroll categoryList={categoryList} chooseHandle={() => {}}/>
+        <NavScroll
+          categoryList={categoryList}
+          curCategory={curCategory}
+          chooseHandle={(category) => {
+            this.setState({
+              curCategory: category.category
+            })
+            this.props.dispatchGetVideoList(category);
+          }}
+        />
         <Scroll>
-          <VideoList videoList={videoList} />
+          <VideoList videoList={videoList} chooseHandle={() => {
+            
+          }}/>
         </Scroll>
       </div>
     );
