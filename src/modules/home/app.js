@@ -2,6 +2,7 @@ import dva from 'dva';
 import cartoon from './models/cartoon';
 import video from './models/video';
 import RouterConfig from './routes';
+import '../../utils/rem';
 import './style/main.scss';
 window.HELP_IMPROVE_VIDEOJS = false;
 
@@ -13,4 +14,18 @@ app.model(video);
 
 app.router(RouterConfig);
 
-app.start('#root');
+
+
+function start() {
+  app.start('#root');
+}
+
+function run() {
+  start();
+  if (module.hot) {
+    module.hot.accept(start);
+  }
+}
+
+
+run();

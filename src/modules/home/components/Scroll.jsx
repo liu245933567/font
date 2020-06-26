@@ -180,6 +180,8 @@ Scroll.propTypes = {
   noMoreText: PropTypes.string,
   /** 插槽内容 */
   children: PropTypes.elementType,
+  /** input className */
+  inputClassName: PropTypes.string,
 };
 
 Scroll.defaultProps = {
@@ -201,6 +203,7 @@ Scroll.defaultProps = {
   pullUpText: "上拉加载更多",
   noMoreText: "没有更多了",
   children: null,
+  inputClassName: ''
 };
 
 export default Scroll;

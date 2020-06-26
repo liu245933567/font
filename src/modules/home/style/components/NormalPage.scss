@@ -1,6 +1,8 @@
 .NormalPage_Component_Wrapper {
   display: flex;
+  width: 10rem;
   height: 100%;
+  margin: auto;
   flex-direction: column;
   .NormalPage_Content_wrapper{
     flex: 1;

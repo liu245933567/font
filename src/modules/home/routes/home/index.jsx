@@ -4,7 +4,7 @@ import Home from "./Home";
 import Cartoon from "./Cartoon";
 import Movie from "./Movie";
 import User from "./User";
-
+import PropTypes from "prop-types";
 import NormalPage from "../../components/NormalPage";
 
 export default class Index extends React.Component {
@@ -27,7 +27,7 @@ export default class Index extends React.Component {
     const Content = () => {
       switch (curNavTab) {
         case "home":
-          return <Home />;
+          return <Home history={this.props.history}/>;
         case "movie":
           return <Movie />;
         case "cartoon":
@@ -52,4 +52,6 @@ export default class Index extends React.Component {
   }
 }
 
-Index.propTypes = {};
+Index.propTypes = {
+  history: PropTypes.object
+};

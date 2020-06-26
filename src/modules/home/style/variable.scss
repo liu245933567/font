@@ -1,8 +1,12 @@
 // 头部标题高度
 $headerHeight: .5rem;
 // 播放器高度
-$playerHeight: 3rem;
+$playerHeight: 5.5rem;
 // 元素间隔
-$normalInterval: 20px;
+$normalInterval: .266667rem /* 20/75 */;
 // 主题背景色
 $themeBackgroundColor: #f5f5f5;
+// 活动色
+$activeColor: #1296db;
+// 普通字体大小
+$normalFontSize: .426667rem /* 32/75 */;
