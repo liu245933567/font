@@ -6,15 +6,23 @@ import { connect } from "dva";
 import PropTypes from "prop-types";
 
 @connect(
-  (state) => {
+  ({ video }) => {
+    const { videoList, categoryList } = video;
     return {
-      videoList: state.video.videoList,
+      videoList,
+      categoryList,
     };
   },
   (dispatch) => ({
     dispatchGetVideoList(payload) {
       dispatch({
         type: "video/getVideoList",
+        payload,
+      });
+    },
+    dispatchGetVideoCategories(payload) {
+      dispatch({
+        type: "video/getVideoCategories",
         payload,
       });
     },
@@ -26,14 +34,15 @@ class Movie extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchGetVideoList({});
+    // this.props.dispatchGetVideoList({});
+    this.props.dispatchGetVideoCategories({});
   }
   render() {
-    const { videoList } = this.props;
+    const { videoList, categoryList } = this.props;
     console.log("videoList", videoList);
     return (
       <div className="Movie_Page_Wrapper">
-        <NavScroll />
+        <NavScroll categoryList={categoryList} chooseHandle={() => {}}/>
         <Scroll>
           <VideoList videoList={videoList} />
         </Scroll>
@@ -44,11 +53,15 @@ class Movie extends React.Component {
 
 Movie.propTypes = {
   videoList: PropTypes.array,
+  categoryList: PropTypes.array,
   dispatchGetVideoList: PropTypes.func,
+  dispatchGetVideoCategories: PropTypes.func,
 };
 Movie.defaultProps = {
   videoList: [],
+  categoryList: [],
   dispatchGetVideoList: () => {},
+  dispatchGetVideoCategories: () => {},
 };
 
 export default Movie;

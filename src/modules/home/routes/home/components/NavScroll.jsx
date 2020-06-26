@@ -1,25 +1,37 @@
 import React from "react";
 import Scroll from "../../../components/Scroll";
-// import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const NavScroll = () => {
+const NavScroll = ({ categoryList, chooseHandle }) => {
   return (
     <div className="NavScroll_Component_wrapper">
       <Scroll scrollX scrollY={false}>
         <div className="NavScroll_Content">
-          <div>首页</div>
-          <div>首真实的页</div>
-          <div>首wef页</div>
-          <div>首页</div>
-          <div>首ssss页</div>
-          <div>首页</div>
+          {categoryList.map((category) => {
+            return (
+              <div
+                key={category.category}
+                onClick={() => {
+                  chooseHandle(category);
+                }}
+              >
+                {category.category}
+              </div>
+            );
+          })}
         </div>
       </Scroll>
     </div>
   );
 };
 
-NavScroll.propTypes = {};
-NavScroll.defaultProps = {};
+NavScroll.propTypes = {
+  categoryList: PropTypes.array,
+  chooseHandle: PropTypes.func,
+};
+NavScroll.defaultProps = {
+  categoryList: [],
+  chooseHandle: () => {},
+};
 
 export default NavScroll;

@@ -3,19 +3,17 @@
  * @Description: 视频列表组件
  * @Date: 2020-06-26 17:01:18
  * @Last Modified by: LiuYh
- * @Last Modified time: 2020-06-26 23:12:05
+ * @Last Modified time: 2020-06-26 23:51:20
  */
 
 import React from "react";
-// import Scroll from "./Scroll";
 import PropTypes from "prop-types";
-import LazyLoad from "react-lazyload";
-import {STATICHOST} from 'config';
+// import LazyLoad from "react-lazyload";
+import { STATICHOST } from "config";
 
 const VideoList = ({ videoList, currentVideoKey, chooseHandle }) => {
   return (
     <div className="VideoList_Component_Wrapper">
-      {/* <Scroll> */}
       <div className="videos_wrapper">
         {videoList.map((video, index) => {
           return (
@@ -27,16 +25,16 @@ const VideoList = ({ videoList, currentVideoKey, chooseHandle }) => {
               }}
             >
               <div className="video_preview_wrapper">
-                <LazyLoad height={'2.6rem'} once>
+                {/* <LazyLoad height={'2.6rem'}>
                   <img
                     className="video_preview_src"
                     src={`${STATICHOST}${video.previewImgUrl}`}
                   />
-                </LazyLoad>
-                {/* <img
+                </LazyLoad> */}
+                <img
                   className="video_preview_src"
                   src={`${STATICHOST}${video.previewImgUrl}`}
-                /> */}
+                />
                 <div className="video_preview_info">
                   <div className="video_info amount_play">暂无</div>
                   <div className="video_info bullet_screen_amount">暂无</div>
@@ -54,7 +52,6 @@ const VideoList = ({ videoList, currentVideoKey, chooseHandle }) => {
           );
         })}
       </div>
-      {/* </Scroll> */}
     </div>
   );
 };
