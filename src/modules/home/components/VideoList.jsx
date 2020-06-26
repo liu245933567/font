@@ -3,39 +3,53 @@
  * @Description: 视频列表组件
  * @Date: 2020-06-26 17:01:18
  * @Last Modified by: LiuYh
- * @Last Modified time: 2020-06-26 20:31:09
+ * @Last Modified time: 2020-06-26 23:12:05
  */
 
 import React from "react";
 // import Scroll from "./Scroll";
 import PropTypes from "prop-types";
-
-const HOST = "http://192.168.31.71:3000";
+import LazyLoad from "react-lazyload";
+import {STATICHOST} from 'config';
 
 const VideoList = ({ videoList, currentVideoKey, chooseHandle }) => {
-  console.log("videoList ---", videoList);
   return (
     <div className="VideoList_Component_Wrapper">
       {/* <Scroll> */}
       <div className="videos_wrapper">
-        {videoList.map((video) => {
+        {videoList.map((video, index) => {
           return (
-            <div 
-              className="video_item" 
-              key={video.createdTime}
-              onClick={() => {chooseHandle(video)}}
+            <div
+              className="video_item"
+              key={video.createdTime + index}
+              onClick={() => {
+                chooseHandle(video);
+              }}
             >
               <div className="video_preview_wrapper">
-                <img
+                <LazyLoad height={'2.6rem'} once>
+                  <img
+                    className="video_preview_src"
+                    src={`${STATICHOST}${video.previewImgUrl}`}
+                  />
+                </LazyLoad>
+                {/* <img
                   className="video_preview_src"
-                  src={`${HOST}${video.previewImgUrl}`}
-                />
+                  src={`${STATICHOST}${video.previewImgUrl}`}
+                /> */}
                 <div className="video_preview_info">
                   <div className="video_info amount_play">暂无</div>
                   <div className="video_info bullet_screen_amount">暂无</div>
                 </div>
               </div>
-              <div className={`video_name ${(HOST + video.videoUrl) === currentVideoKey && 'video_name_watching'}`}>{video.fileName}</div>
+              <div
+                className={`video_name ${
+                  STATICHOST + video.videoUrl === currentVideoKey &&
+                  "video_name_watching"
+                }`}
+              >
+                {video.fileName}
+              </div>
             </div>
           );
         })}

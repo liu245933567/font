@@ -5,7 +5,7 @@ import Video from "../../components/Video";
 import Scroll from "../../components/Scroll";
 import VideoList from "../../components/VideoList";
 import NormalPage from "../../components/NormalPage";
-const HOST = "http://192.168.31.71:3000";
+import {STATICHOST} from 'config';
 
 @connect(
   (state) => {
@@ -41,7 +41,7 @@ export default class Cinema extends React.Component {
    */
   changeVideoSource(video) {
     this.setState({
-      videoSource: `${HOST}${video.videoUrl}`,
+      videoSource: `${STATICHOST}${video.videoUrl}`,
     });
   }
 
@@ -49,7 +49,7 @@ export default class Cinema extends React.Component {
     const { videoList } = this.props;
     const { videoSource } = this.state;
     /** 列表第一个元素的地址 */
-    const firstVideoSource = videoList[0] && `${HOST}${videoList[0].videoUrl}`;
+    const firstVideoSource = videoList[0] && `${STATICHOST}${videoList[0].videoUrl}`;
     return (
       <NormalPage>
         <div className="Cinema_Page_Wrapper">

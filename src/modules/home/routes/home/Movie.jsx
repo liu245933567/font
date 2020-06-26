@@ -1,6 +1,7 @@
 import React from "react";
 import NavScroll from "./components/NavScroll";
 import VideoList from "../../components/VideoList";
+import Scroll from "../../components/Scroll";
 import { connect } from "dva";
 import PropTypes from "prop-types";
 
@@ -24,16 +25,18 @@ class Movie extends React.Component {
     super(props);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatchGetVideoList({});
   }
   render() {
     const { videoList } = this.props;
-    console.log('videoList',videoList);
+    console.log("videoList", videoList);
     return (
       <div className="Movie_Page_Wrapper">
         <NavScroll />
-        <VideoList videoList={videoList} />
+        <Scroll>
+          <VideoList videoList={videoList} />
+        </Scroll>
       </div>
     );
   }
@@ -41,11 +44,11 @@ class Movie extends React.Component {
 
 Movie.propTypes = {
   videoList: PropTypes.array,
-  dispatchGetVideoList: PropTypes.func
+  dispatchGetVideoList: PropTypes.func,
 };
 Movie.defaultProps = {
   videoList: [],
-  dispatchGetVideoList: () => {}
+  dispatchGetVideoList: () => {},
 };
 
 export default Movie;

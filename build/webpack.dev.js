@@ -5,7 +5,7 @@ const {
   pathResolve,
   // getIP
 } = require("./utils");
-const proxyHost = 'http://192.168.31.71:3000';
+const proxyHost = 'http://dev.yanyuge.xyz:3000';
 
 module.exports = smart(base, {
   mode: "development",
