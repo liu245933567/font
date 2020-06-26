@@ -1,83 +1,55 @@
 import React from "react";
-import { connect } from "dva";
-import { Grid } from "antd-mobile";
-import PropTypes from "prop-types";
 import NavTab from "../../components/NavTab";
+import Home from "./Home";
+import Cartoon from "./Cartoon";
+import Movie from "./Movie";
+import User from "./User";
+
 import NormalPage from "../../components/NormalPage";
 
-@connect(
-  (state) => {
-    return {
-      cartoonList: state.cartoon.cartoonList,
-    };
-  },
-  (dispatch) => ({
-    dispatchGetCartoonList(payload) {
-      dispatch({
-        type: "cartoon/getCartoonList",
-        payload,
-      });
-    },
-    dispatchSaveCartoonDetail(payload) {
-      dispatch({
-        type: "cartoon/saveCartoonDetail",
-        payload,
-      });
-    },
-    dispatchChangeQueryCartoonDetailParams(payload) {
-      dispatch({
-        type: "cartoon/changeQueryCartoonDetailParams",
-        payload,
-      });
-    },
-  })
-)
-export default class Home extends React.Component {
+export default class Index extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      curNavTab: "home",
+    };
+    this.chooseTab = this.chooseTab.bind(this);
   }
 
-  componentDidMount() {
-    this.props.dispatchGetCartoonList({});
+  chooseTab(tabId) {
+    this.setState({
+      curNavTab: tabId,
+    });
   }
+
   render() {
-    const { cartoonList } = this.props;
+    const { curNavTab } = this.state;
+    const Content = () => {
+      switch (curNavTab) {
+        case "home":
+          return <Home />;
+        case "movie":
+          return <Movie />;
+        case "cartoon":
+          return <Cartoon />;
+        case "user":
+          return <User />;
+        default:
+          return <Home />;
+      }
+    };
     return (
-      <NormalPage customFooter={<NavTab/>} showFooter showHeader={false}>
-        <div className="Home_Page_Wrapper">
-          <div>
-            <Grid
-              data={cartoonList}
-              columnNum={3}
-              renderItem={(cartoonItem) => (
-                <div
-                  onClick={() => {
-                    this.props.history.push({
-                      pathname: "/cinema",
-                    });
-                  }}
-                >
-                  <img
-                    className="cartoon_coverImage"
-                    src={cartoonItem.coverImage}
-                  />
-                  <div>
-                    <span>{cartoonItem.cartoonName}</span>
-                  </div>
-                </div>
-              )}
-            />
-          </div>
-        </div>
+      <NormalPage
+        customFooter={
+          <NavTab curNavTab={curNavTab} pressCallBack={this.chooseTab} />
+        }
+        showFooter
+        showHeader={false}
+      >
+        <Content />
       </NormalPage>
     );
   }
 }
 
-Home.propTypes = {
-  cartoonList: PropTypes.array,
-  dispatchGetCartoonList: PropTypes.func,
-  dispatchChangeQueryCartoonDetailParams: PropTypes.func,
-  dispatchSaveCartoonDetail: PropTypes.func,
-  history: PropTypes.object,
-};
+Index.propTypes = {};

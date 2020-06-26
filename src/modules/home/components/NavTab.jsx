@@ -1,33 +1,23 @@
+/*
+ * @Author: LiuYh
+ * @Description: 底部导航栏
+ * @Date: 2020-06-26 14:43:33
+ * @Last Modified by: LiuYh
+ * @Last Modified time: 2020-06-26 14:47:16
+ */
+
 import React from "react";
+import PropTypes from "prop-types";
 import { TabBar } from "antd-mobile";
 
 const TabBarData = [
-  {
-    title: "Life",
-    key: "Life",
-    icon: "https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
-    selectedIcon:
-      "https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
-  },
-  {
-    title: "Koubei",
-    key: "Koubei",
-    icon: "https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg",
-    selectedIcon:
-      "https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg",
-  },
+  { title: "首页", key: "home" },
+  { title: "视频", key: "movie" },
+  { title: "动漫", key: "cartoon" },
+  { title: "我", key: "user" },
 ];
 
-{/* <div
-  style={{
-    width: "22px",
-    height: "22px",
-    background:
-      "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
-  }}
-/>; */}
-
-const NavTab = () => {
+const NavTab = ({ curNavTab, pressCallBack }) => {
   return (
     <TabBar
       unselectedTintColor="#949494"
@@ -37,19 +27,22 @@ const NavTab = () => {
       hidden={false}
     >
       {TabBarData.map((tabItem) => {
+        const { title, key } = tabItem;
         return (
           <TabBar.Item
-            title={tabItem.title}
-            key={tabItem.key}
-            icon={{
-              uri: tabItem.icon,
+            title={title}
+            key={key}
+            icon={<div className={`Nav_Tab_Item Nav_Tab_Item_${key}`} />}
+            selectedIcon={
+              <div className={`Nav_Tab_Item Nav_Tab_Item_${key}_active`} />
+            }
+            selected={key === curNavTab}
+            // badge={1}
+            onPress={() => {
+              if (curNavTab !== key) {
+                pressCallBack(key);
+              }
             }}
-            selectedIcon={{
-              uri: tabItem.selectedIcon,
-            }}
-            selected
-            badge={1}
-            onPress={() => {}}
             data-seed="logId"
           />
         );
@@ -57,6 +50,16 @@ const NavTab = () => {
     </TabBar>
   );
 };
-NavTab.propTypes = {};
+NavTab.propTypes = {
+  /** 当前选中的tab */
+  curNavTab: PropTypes.string,
+  /** 点击 tab 的回调 */
+  pressCallBack: PropTypes.func,
+};
+
+NavTab.defaultProps = {
+  curNavTab: "home",
+  pressCallBack: () => {},
+};
 
 export default NavTab;

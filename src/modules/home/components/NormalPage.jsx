@@ -3,20 +3,18 @@
  * @Description: 公共页面模板组件
  * @Date: 2020-06-26 11:45:27
  * @Last Modified by: LiuYh
- * @Last Modified time: 2020-06-26 12:28:35
+ * @Last Modified time: 2020-06-26 14:39:09
  */
 
 import React from "react";
 import PropTypes from "prop-types";
 import { NavBar, Icon } from "antd-mobile";
 
-export default class NormalPage extends React.Component {
+class NormalPage extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {}
-  componentWillUnmount() {}
   render() {
     const { showHeader, showFooter, customFooter, children } = this.props;
     return (
@@ -55,11 +53,11 @@ NormalPage.propTypes = {
   showFooter: PropTypes.bool,
   /** 自定义底部组件 */
   customFooter: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.element
-  ]),
+  /** 子元素 */
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
 };
 NormalPage.defaultProps = {
-  showHeader: true
-}
+  showHeader: true,
+};
+
+export default NormalPage;
